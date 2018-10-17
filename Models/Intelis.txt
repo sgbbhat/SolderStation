@@ -1,198 +1,23 @@
 [Test Table]
-Name				Type				Min Spec	Max Spec	Unit	Resol.	Audit	Setup
-Enter Mfg ID,			Action,				1,		1,		,	0,	1.00,	None
-Clear Status,			Action,				0,		0,		,	0,	1.00,	None
-Verify PN,			Test,				1,		1,		,	0,	1.00,	None
-Switch Antenna,			Action,				0,		0,		,	0,	1.00,	RF1
-Load,				Action,				1,		1,		,	0,	1.00,	None
-PS Sense Mode,			Action,				0,		0,		,	0,	1.00,	HLOCAL
-Disable Positions,		Action,				1,		1,		,	0,	0.00,	None
-Process Enforcement,		Test,				-1,		1,		,	0,	0.00,	None
-3.6 Supply,			Test_Stop on Fail,		7.0,		80,		mA,	1,	1.00,	0.1
-PS Sense Mode,			Action,				0,		0,		,	0,	1.00,	LREMOTE
-Check Fuse,			Action_Stop on Fail,		1,		1,		,	0,	1.00,	None
-uP Program,			Test_Stop on Fail,		1,		1,		,	0,	1.00,	None
-Set Batt Volt,			Action,				0,		0,		,	0,	1.00,	None
-Physical Temp,			Test,				16,		30,		,	0,	1.00,	None
-UART MUX,			Action,				0,		0,		,	0,	1.00,	None
-Delay,				Action,				0,		0,		,	0,	1.00,	1.0
-Serial Number,			Test,				70000000,	78999999,	,	0,	1.00,	0
-Compare Firmware BOM PN,	Test,				1,		1,		,	0,	0.01,	None
-Clear uP Resets,		Test,				1,		1,		,	0,	1.00,	None
-MCU Voltage Setting,		Test,				8,		8,		,	0,	1.00,	None
-RD Voltage Setting,		Test,				8,		8,		,	0,	1.00,	None
-LS Voltage Setting,		Test,				8,		8,		,	0,	1.00,	None
-Encoder Voltage Setting,	Test,				27,		27,		,	0,	1.00,	None
-24dBm PA voltage setting,	Test,				15,		15,		,	0,	1.00,	None
-27dBm PA Voltage Setting,	Test,				15,		15,		,	0,	1.00,	None
-Elster Encoder Voltage Setting,	Test,				14,		14,		,	0,	1.00,	None
-Temp Read,			Test,				18,		30,		,	0,	1.00,	3
-Temp Read Cald,			Test,				100,		200,		,	0,	1.00,	None
-RF SW,				Action,				0,		0,		,	0,	1.00,	None
-Switch Antenna,			Action,				0,		0,		,	0,	1.00,	RF2
-Start Tx Freq Mid,		Test,				914.9705,	915.02905,	MHz,	5,	1.00,	None
-Tune Freq,			Test,				915.0007,	915.00146,	MHz,	5,	1.00,	None
-Freq Setting,			Test,				-508,		508,		,	0,	1.00,	None
-Tune Iterations,		Test,				0,		3,		,	0,	1.00,	None
-Switch Antenna,			Action,				0,		0,		,	0,	1.00,	RF1
-Setup Tx Current,		Action,				0,		0,		,	0,	1.00,	0.101
-Tx Ultra High Power @ Mid Freq,	Test,				25,		29,		dBm,	1,	1.00,	NO_I
-Tx Ultra High Power Tune Iterations,	Test,			0,		3,		,	0,	1.00,	8;1
-Delay,				Action,				0,		0,		,	0,	1.00,	1.0
-Tx Ultra High Power @ Mid Freq,	Test,				25,		29,		dBm,	1,	1.00,	None
-Tx Ultra High Current,		Test,				300,		630,		mA,	1,	1.00,	None
-Switch Antenna,			Action,				0,		0,		,	0,	1.00,	RF2
-Setup Tx Current,		Action,				0,		0,		,	0,	1.00,	0.101
-Tx High Power @ Mid Freq,	Test,				20,		25,		dBm,	1,	1.00,	5.5;1
-Tx High Current,		Test,				200,		400,		mA,	1,	1.00,	None
-Delay,				Action,				0,		0,		,	1,	1.00,	1
-Setup Tx Current,		Action,				0,		0,		,	0,	1.00,	0.01
-Tx Mid Power @ Mid Freq,	Test,				8,		14,		dBm,	1,	1.00,	None
-Tx Mid Current,			Test,				26.0,		36.0,		mA,	2,	1.00,	None
-Setup Tx Current,		Action,				0,		0,		,	0,	1.00,	0.005
-Tx Low Power @ Mid Freq,	Test,				-9.0,		-3.0,		dBm,	1,	1.00,	NO_I
-Tx Low Current,			Test,				10,		14,		mA,	1,	0.00,	None
-Switch Antenna,			Action,				0,		0,		,	0,	1.00,	RF1
-Rx Sensitivity Go-NoGo,		Test,				1,		1,		,	0,	1.00,	-102
-RSSI @ Sensitivity Spec,	Test,				-140,		-95,		,	0,	1.00,	None
-Rx Sensitivity,			Test,				-140,		-95,		dBm,	1,	0.01,	2
-RSSI @ Sensitivity,		Test,				-140,		-95,		dBm,	1,	0.01,	None
-Firmware Rev,			Test,				6.24,		100,		,	2,	1.00,	None
-Count,				Test,				1,		9999999,	,	0,	1.00,	0.005
-Read Encoder Status,		Test,				0,		0,		,	0,	1.00,	None
-Encoder Current,		Test,				3,		6.5,		mA,	2,	1.00,	None
-Internal Exceptions Check,	Test,				0,		0,		,	0,	1.00,	None
-uP Reset Check,			Test,				0,		1,		,	0,	1.00,	None
-Set Unlock Pwd,			Test,				1,		1,		,	0,	1.00,	None
-Vmicro High Speed,		Test,				2.50,		2.70,		V,	3,	1.00,	None
-Set Security Keys,		Test,				1,		1,		,	0,	1.00,	None
-Idle Current,			Test,				5,		280,		uA,	1,	1.00,	15
-Change Security Keys,		Test,				1,		1,		,	0,	0.01,	None
-Verify Utility Factory Key,	Test,				1,		1,		,	0,	0.01,	None
-Blow Fuse,			Test,				1,		1,		,	0,	1.00,	None
-Power Down,			Action_Stop on Fail_Abort,	1,		1,		,	0,	1.00,	1.5
-Test Time,			Test_Stop on Fail,		0,		999,		sec,	0,	1.00,	None
-Unload,				Action_Stop on Fail_Abort,	1,		1,		,	0,	1.00,	None
-PS Sense Mode,			Action,				0,		0,		,	0,	1.00,	HLOCAL
-Log Test Data_SQL,		Action_Stop on Fail,		0,		0,		,	0,	1.00,	None
-Failure Notification,		Action_Stop on Fail_Abort,	0,		0,		,	0,	1.00,	None
+Name,					Type,				Min Spec, 	Max Spec, 	Unit, 	Resol, 	Audit, 	Setup
+Enter Mfg ID,				Action,				1,			1,				,	0,		1.00,	None
+Load,					Action,				1,			1,				,	0,		1.00,	None
+Serial Number,			Test,				70000000,	78999999,		,	0,		1.00,	None
+Verify PN,				Test,				-1,			1,				,	0,		1.00,	None
+Process Enforcement,		Test,				-1,			1,				,	0,		1.00,	None
+BAT1 Voltage,			Test,				5.8,			6.5,			V,		1,		1.00,	None
+BAT2 Voltage,			Test,				5.8,			6.5,			V,		1,		1.00,	None
+RST1  Voltage,			Test,				0,			3,			V,		1,		1.00,	None
+RST2 Voltage,			Test,				0,			3,			V,		1,		1.00,	None
+Wakeup Pulse, 			Test, 				1, 			1, 			,		0,		1.00,	None
+Test Time,				Test,				0,			999,		sec	,	0,		1.00,	None
+Unload,					Action,				1,			1,				,	0,		1.00,	None
+Log Test Data_SQL,		Action,				0,			0,				,	0,		1.00,	None
 
 [Disabled Tests]
 
 [General]
-Instruction Link=\\was-fs2\Documentation\REL\Pra\pra0771012.pdf
-Path Loss File=C:\SWA-1300-202 100W P4 Automated Board Test\Test Data\100W P4 KGU Offset.ini
-KGU Spec File=C:\SWA-1300-202 100W P4 Automated Board Test\Models\Models Special Testing\PCA-1300-127 KGU.txt
-Rx Sens Atten File="C:\SWA-1300-202 100W P4 Automated Board Test\Test Data\Rx Sens Atten P4.ini"
-Ave Meas Path Loss File="C:\SWA-1300-202 100W P4 Automated Board Test\Test Data\100W P4 Path Loss.ini"
-Serial Range File = "C:\SWA-1300-202 100W P4 Automated Board Test\Station\Serial Ranges 100W P4.ini"
-Antenna Map File=C:\SWA-1300-202 100W P4 Automated Board Test\Station\Antenna Map.ini
 Part_No=PCA-1300-123
 FG Part_No=ERW-1300-302
 Unit Type=100W Encoder
 Notes=""
-Correlation Station=Test Bench 1
-zCorrelation Station=None
-Correlation Offset=0
-Process Flow Name=100W Phase 4
-Fixture=HWA-0020-001 Interface
-
-[Firmware]
-Code File="C:\SWA-1300-202 100W P4 Automated Board Test\100W P4 Firmware\FMW-1300-624.txt"
-
-[MSP Programmer]
-Config File=C:\SWA-1300-202 100W P4 Automated Board Test\MSP Programmer\100W_P4_config.cfg
-Assign File=C:\SWA-1300-202 100W P4 Automated Board Test\MSP Programmer\FPAs-setup.ini
-DLL Directory=C:\SWA-1300-202 100W P4 Automated Board Test\Development\MSP Programmer Library
-
-[SN]
-SN File="C:\SWA-1300-202 100W P4 Automated Board Test\Test Data\SN.txt"
-
-[Handler]
-# Units per Panel=12
-# Pass for Good Panel=12
-
-[DC Power]
-Max Batt Volt=3.6
-Batt Volt Test=3.6
-Batt Current=1.5
-Source Impedence = 0.4
-
-[Tx Freq]
-Ref Level=0
-Trig Level=-25
-Channel=65
-
-[Tx Power]
-Get Path Loss=1
-Low Power Ref Level=-20
-Low Power Trig Level=-45
-Mid Power Ref Level=0
-Mid Power Trig Level=-25
-High Power Ref Level=20
-High Power Trig Level=-5
-Ultra High Power Ref Level=-10
-Ultra High Power Trig Level=-35
-Geo Low Power Ref Level=10
-Geo Low Power Trig Level=-15
-Geo High Power Ref Level=10
-Geo High Power Trig Level=-15
-Capture Time = 0.018
-Low Chan=30
-Mid Chan=65
-High Chan=99
-
-[Calibration]
-Low Power Cal Offset=12
-Mid Power Cal Offset=28
-High Power Cal Offset=15
-Ultra High Power Cal Offset=19
-Geo Low Power Cal Offset=10
-Geo High Power Cal Offset=14
-
-[Tx Current]
-Trig Level=0.010
-Trig Hysteresis=0.006
-
-[Voltage Calibration]
-24dBm PA voltage setting=15
-27dBm PA Voltage Setting=15
-Encoder voltage setting=27
-Leak Sensor voltage setting=14
-Remote Disconnect voltage setting=8
-Micro voltage setting=8
-Elster Encoder Voltage Setting=14
-
-[Security]
-Itron Factory Key Start Address=13458
-Utility Factory Key Start Address=13440
-
-[Tx Mid Current Tuning Prefix]
-{y= 0 + 1x + 2x^2 + 3x^3 + 4x^4 + 5x^5 + 6x^6 where 0=offset}
-0=-4.13575E+01
-1=2.08594E+03
-2=3.01005E+04
-3=0
-4=0
-5=0
-6=0
-
-[Tx High Current Tuning Prefix]
-{y= 0 + 1x + 2x^2 + 3x^3 + 4x^4 + 5x^5 + 6x^6 where 0=offset}
-0=-3.95852E+01
-1=4.02088E+03
-2=-1.27004E+05
-3=1.88180E+06
-4=-1.26332E+07
-5=2.80015E+07
-6=2.23101E+07
-
-[Rx Sens]
-High Atten=55
-Low Atten=28
-
-[Encoder Switching]
-0=CH2,COM0
-1=CH8,COM1
-2=CH17,COM2
-3=CH23,COM3
