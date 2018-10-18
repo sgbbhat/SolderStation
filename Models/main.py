@@ -24,10 +24,8 @@ switcher = {
 		1: Serial_Number, 
 		2: Verify_PN, 
 		3: Process_Enforcement, 
-		4: BAT1_Voltage, 
-		5: BAT2_Voltage, 
-		6: RST1_Voltage, 
-		7: RST2_Voltage, 
+		4: BAT_Voltage, 
+		6: RST_Voltage, 
 		8: Wakeup_Pulse, 
 		9: Test_Time, 
 		10: Log_Test_Data_SQL
@@ -44,13 +42,13 @@ elif TestName == "Verify PN":
 	argument = 2
 elif TestName == "Process Enforcement":
 	argument = 3
-elif TestName == "BAT1 Voltage":
+elif TestName == "BAT Voltage":
 	argument = 4
-elif TestName == "BAT2 Voltage,":
+elif TestName == "BAT Voltage,":
 	argument = 5
-elif TestName == "RST1 Voltage":
+elif TestName == "RST Voltage":
 	argument = 6
-elif TestName == "RST2 Voltage":
+elif TestName == "RST Voltage":
 	argument = 7
 elif TestName == "Wakeup Pulse":
 	argument = 8
