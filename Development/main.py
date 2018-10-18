@@ -7,6 +7,7 @@ from BAT_Voltage import BAT_Voltage
 from RST_Voltage import RST_Voltage
 from Wakeup_Pulse import Wakeup_Pulse 
 from Log_Test_Data_SQL import Log_Test_Data_SQL
+from append_TestEvent import append_TestEvents
 
 StartTime = time.time()
 EndTime = time.time()
@@ -25,6 +26,7 @@ switcher = {
 		2: Verify_PN, 
 		3: Process_Enforcement, 
 		4: BAT_Voltage, 
+		5: append_TestEvents,
 		6: RST_Voltage, 
 		8: Wakeup_Pulse, 
 		9: Test_Time, 
@@ -44,7 +46,7 @@ elif TestName == "Process Enforcement":
 	argument = 3
 elif TestName == "BAT Voltage":
 	argument = 4
-elif TestName == "BAT Voltage,":
+elif TestName == "append_TestEvents,":
 	argument = 5
 elif TestName == "RST Voltage":
 	argument = 6
