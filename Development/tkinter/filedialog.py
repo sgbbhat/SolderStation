@@ -2,16 +2,20 @@
 from tkinter import filedialog
 from tkinter import *
 
+folder_path = ""
+
 def showDialogButton():
 	global folder_path
-	filename = filedialog.askopenfilename(initialdir = "/", title = "Select files", filetypes = (("text files", "*.txt") , ("all files", "*.*")))
-	folder_path.set(filename)
+	folder_path = filedialog.askopenfilename(initialdir = "/", title = "Select files", filetypes = (("text files", "*.txt") , ("all files", "*.*")))
+	FilePathLabel.config(text = folder_path)
 
 root = Tk()
-folder_path = StringVar()
-button_pressed = BooleanVar()
-button2 = Button(text = "Browse", command = showDialogButton)
-button2.grid(row=0, column=3)
-print(folder_path)
 
+# Select model file Button 
+SelectModelButtonImage = PhotoImage(file = 'SelectFile.png')
+SelectModelButtonImageSub = SelectModelButtonImage.subsample(6,6)
+SelectModelButton = Button(root, image=SelectModelButtonImageSub, bg = 'white', command = showDialogButton)
+SelectModelButton.grid(row=0, column=30)
+FilePathLabel = Label(root, text = "" , height = 3, width = 60, borderwidth = 4, relief = "groove")
+FilePathLabel.grid(row=0, column=0)
 root.mainloop()
