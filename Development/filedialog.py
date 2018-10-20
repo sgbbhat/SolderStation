@@ -5,15 +5,19 @@ from tkinter import *
 from database_connect import database_connect
 from execute_query_SELECT import execute_query_SELECT
 from tkinter import messagebox 
+from readINI import readINI
 
 def showDialogButton():
-	folder_path = filedialog.askopenfilename(initialdir = "/home/pi/Documents/SolderStation/Models", title = "Select Model File", filetypes = (("text files", "*.txt") , ("all files", "*.*")))
+	folder_path = filedialog.askopenfilename(initialdir = ModelDirectory , title = "Select Model File", filetypes = (("text files", "*.txt") , ("all files", "*.*")))
 	FilePathLabel.config(text = folder_path)
 
 root = Tk()
 
+# Read INI file
+StationName, ErrorLog, ModelDirectory = readINI()
+
 # Window settings
-root.title("Solder Station")
+root.title(StationName)
 root.geometry("700x400")
 root.resizable(0,0)
 root.configure(background='SlateGray4')
