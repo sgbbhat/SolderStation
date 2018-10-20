@@ -1,66 +1,66 @@
-import time
-from Serial_Number import Serial_Number
-from Enter_Mfg_ID import Enter_Mfg_ID
-from Verify_PN import Verify_PN
-from Process_Enforcement import Process_Enforcement
-from BAT_Voltage import BAT_Voltage
-from RST_Voltage import RST_Voltage
-from Wakeup_Pulse import Wakeup_Pulse 
-from Log_Test_Data_SQL import Log_Test_Data_SQL
-from append_TestEvent import append_TestEvents
+#!/usr/bin/env python3
 
-StartTime = time.time()
-EndTime = time.time()
+from tkinter import filedialog
+from tkinter import *
+from database_connect import database_connect
+from execute_query_SELECT import execute_query_SELECT
+from tkinter import messagebox 
+from readINI import readINI
+import datetime
 
-def Test_Time():
-	global EndTime
-	global StartTime
-	EndTime = time.time()
-	TestDuration = EndTime - StartTime
-	print(TestDuration)
-	return 'Returning Test Time'
+def showDialogButton():
+	folder_path = filedialog.askopenfilename(initialdir = ModelDirectory , title = "Select Model File", filetypes = (("text files", "*.txt") , ("all files", "*.*")))
+	FilePathLabel.config(text = folder_path)
 
-switcher = {
-		0: Enter_Mfg_ID,
-		1: Serial_Number, 
-		2: Verify_PN, 
-		3: Process_Enforcement, 
-		4: BAT_Voltage, 
-		5: append_TestEvents,
-		6: RST_Voltage, 
-		8: Wakeup_Pulse, 
-		9: Test_Time, 
-		10: Log_Test_Data_SQL
-}
+root = Tk()
 
-TestName = ""
-argument = 0
+# Read INI file
+StationName, ErrorLog, ModelDirectory = readINI()
 
-if TestName == "Enter Mfg ID":
-	argument = 0
-elif TestName == "Serial Number":
-	argument = 1
-elif TestName == "Verify PN":
-	argument = 2
-elif TestName == "Process Enforcement":
-	argument = 3
-elif TestName == "BAT Voltage":
-	argument = 4
-elif TestName == "append_TestEvents,":
-	argument = 5
-elif TestName == "RST Voltage":
-	argument = 6
-elif TestName == "RST Voltage":
-	argument = 7
-elif TestName == "Wakeup Pulse":
-	argument = 8
-elif TestName == "Test Time":
-	argument = 9
-elif TestName == "Log Test Data_SQL":
-	argument = 10
+# Error Log
+ErrorLogHandle = open(ErrorLog, "a")
 
-while(True):
-	print("Enter a number : \n")
-	argument = int(input())
-	func = switcher.get(argument)
-	print(func())
+# Window settings
+root.title(StationName)
+root.geometry("700x400")
+root.resizable(0,0)
+root.configure(background='SlateGray4')
+
+# Label to diplay model file name and location
+FilePathLabel = Label(root, text = "" , height = 2, width = 60, borderwidth = 4, relief = "groove")
+FilePathLabel.place(x=60, y=100)
+
+# Label to diplay model file heading
+FilePathLabelTitle = Label(root, text = "Model" , height = 1,  width = 8, relief = "flat", bg='SlateGray4', fg= 'white', font = ('Times', 11, 'bold'))
+FilePathLabelTitle.place(x=51, y=77)
+
+# Select model file Button 
+SelectModelButtonImage = PhotoImage(file = 'SelectFile.png')
+SelectModelButtonImageSub = SelectModelButtonImage.subsample(16,16)
+SelectModelButton = Button(root, image=SelectModelButtonImageSub, bg = 'white', command = showDialogButton)
+SelectModelButton.place(x=550, y=100)
+
+# Entry widget
+mfgIdInput = Entry(root, bd = '2' , relief = "groove")
+mfgIdInput.place(x=60, y=250)
+
+# Entry widget heading
+FilePathLabelTitle = Label(root, text = "Mfg. ID" , height = 1,  width = 8, relief = "flat", bg='SlateGray4', fg= 'white', font = ('Times', 11, 'bold'))
+FilePathLabelTitle.place(x=52, y=225)
+
+# WasMfg Connection heading
+WasMfgConnectionTitle = Label(root, text = "WasMfg" , height = 1,  width = 8, relief = "flat", bg='SlateGray4', fg= 'white', font = ('Times', 11, 'bold'))
+WasMfgConnectionTitle.place(x=587, y=77)
+
+# Connection to the database
+databaseHandle = database_connect()
+if databaseHandle == -99:
+	WasMfgConnection = Canvas(root, height = 35, width = 35, bg = 'red' )
+	ErrorLogHandle.write(str(datetime.datetime.now()) + " : " + "Failed to connect to the database\n")
+else:
+	WasMfgConnection = Canvas(root, height = 35, width = 35, bg = 'lime green' )
+
+WasMfgConnection.place(x=595, y=100)
+
+root.mainloop()
+
