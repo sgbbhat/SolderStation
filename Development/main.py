@@ -6,12 +6,15 @@ from database_connect import database_connect
 from execute_query_SELECT import execute_query_SELECT
 from tkinter import messagebox 
 from readINI import readINI
+from Enter_Mfg_ID import Enter_Mfg_ID
+from Serial_Number import Serial_Number
+
 import datetime
 
 def showDialogButton():
 	folder_path = filedialog.askopenfilename(initialdir = ModelDirectory , title = "Select Model File", filetypes = (("text files", "*.txt") , ("all files", "*.*")))
-	FilePathLabel.config(text = folder_path)
-
+	FilePathLabel.config(anchor = 'w', text = folder_path)
+	
 root = Tk()
 
 # Read INI file
@@ -27,7 +30,7 @@ root.resizable(0,0)
 root.configure(background='SlateGray4')
 
 # Label to diplay model file name and location
-FilePathLabel = Label(root, text = "" , height = 2, width = 60, borderwidth = 4, relief = "groove")
+FilePathLabel = Label(root, text = "" , height = 2, width = 60, borderwidth = 2, relief = "sunken")
 FilePathLabel.place(x=60, y=100)
 
 # Label to diplay model file heading
@@ -41,7 +44,7 @@ SelectModelButton = Button(root, image=SelectModelButtonImageSub, bg = 'white', 
 SelectModelButton.place(x=550, y=100)
 
 # Entry widget
-mfgIdInput = Entry(root, bd = '2' , relief = "groove")
+mfgIdInput = Entry(root, bd = '2' , relief = "sunken")
 mfgIdInput.place(x=60, y=250)
 
 # Entry widget heading
@@ -59,8 +62,25 @@ if databaseHandle == -99:
 	ErrorLogHandle.write(str(datetime.datetime.now()) + " : " + "Failed to connect to the database\n")
 else:
 	WasMfgConnection = Canvas(root, height = 35, width = 35, bg = 'lime green' )
-
 WasMfgConnection.place(x=595, y=100)
+
+# Field to diplay Messages
+MessageDisplay = Label(root, text = "" , height = 1, width = 47, borderwidth = 2, relief = "sunken", justify = LEFT)
+MessageDisplay.place(x=250, y=250)
+
+# Messages Label heading
+FilePathLabelTitle = Label(root, text = "Messages" , height = 1,  width = 8, relief = "flat", bg='SlateGray4', fg= 'white', font = ('Times', 11, 'bold'))
+FilePathLabelTitle.place(x=252, y=225)
+
+# Main program begins
+def startTest(mfgID):
+	# Insert Switcher here
+	mfgID = Enter_Mfg_ID(mfgIdInput, MessageDisplay)
+	Sln = Serial_Number(databaseHandle, mfgID)
+	print(Sln)
+
+# Binding ENTER key event
+root.bind('<Return>', startTest)
 
 root.mainloop()
 

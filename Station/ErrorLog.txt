@@ -1,0 +1,1 @@
+2018-10-20 15:52:55.015429 : Failed to connect to the database
