@@ -2,8 +2,8 @@
 Version=1.0
 Name=SolderStation
 Comment=Shortcut to run Solder Station application
-Exec=python3 /home/pi/Documents/SolderStation/Development/filedialog.py
-Icon=/home/pi/Documents/SolderStation/Development/filedialog.py
+Exec=python3 /home/pi/Documents/SolderStation/Development/main.py
+Icon=/home/pi/Documents/SolderStation/Development/main.py
 Path=/home/pi/Documents/SolderStation/Development/
 Terminal=False
 Type=Application
