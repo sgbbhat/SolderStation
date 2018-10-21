@@ -15,6 +15,9 @@ from Settings.readINI import readINI
 from Tests.Enter_Mfg_ID import Enter_Mfg_ID
 from Tests.Serial_Number import Serial_Number
 
+# Import Graphics Module
+from Graphics.createLabel import CreateLabel
+
 def showDialogButton():
 	folder_path = filedialog.askopenfilename(initialdir = ModelDirectory , title = "Select Model File", filetypes = (("text files", "*.txt") , ("all files", "*.*")))
 	FilePathLabel.config(anchor = 'w', text = folder_path)
@@ -29,35 +32,37 @@ ErrorLogHandle = open(ErrorLog, "a")
 
 # Window settings
 root.title(StationName)
-root.geometry("700x400")
+root.geometry("650x400")
 root.resizable(0,0)
 root.configure(background='SlateGray4')
 
-# Label to diplay model file name and location
-FilePathLabel = Label(root, text = "" , height = 2, width = 60, borderwidth = 2, relief = "sunken")
-FilePathLabel.place(x=60, y=100)
-
 # Label to diplay model file heading
-FilePathLabelTitle = Label(root, text = "Model" , height = 1,  width = 8, relief = "flat", bg='SlateGray4', fg= 'white', font = ('Times', 11, 'bold'))
-FilePathLabelTitle.place(x=51, y=77)
+FilePathLabelTitle = CreateLabel(root, "FilePathLabelTitle",  "Model"  , 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 18, 7)
+
+# Entry widget heading
+MfgIDLabelTitle = CreateLabel(root, "MfgIDLabelTitle",  "Mfg. ID"  , 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 18, 75)
+
+# Label to diplay Messages heading
+MessagesLabelTitle = CreateLabel(root, "MessagesLabelTitle",  "Messages"  , 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 18, 125)
+
+# Messages Label heading
+LastScannedLabelTitle = CreateLabel(root, "LastScannedLabelTitle",  "Last Scanned Mfg. ID"  , 1,  20, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 217, 75)
+
+# Messages Label heading
+LastScannedSerialNumberTitle = CreateLabel(root, "LastScannedSerialNumberTitle",  "Serial Number"  , 1,  25, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 416, 75)
+
+# WasMfg Connection heading
+WasMfgConnectionTitle = CreateLabel(root, "WasMfgConnectionTitle",  "WasMfg"  , 1,  8, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 543, 7)
 
 # Select model file Button 
 SelectModelButtonImage = PhotoImage(file = 'SelectFile.png')
-SelectModelButtonImageSub = SelectModelButtonImage.subsample(16,16)
+SelectModelButtonImageSub = SelectModelButtonImage.subsample(18,18)
 SelectModelButton = Button(root, image=SelectModelButtonImageSub, bg = 'white', command = showDialogButton)
-SelectModelButton.place(x=550, y=100)
+SelectModelButton.place(x=510, y=30)
 
 # Entry widget
 mfgIdInput = Entry(root, bd = '2' , relief = "sunken")
-mfgIdInput.place(x=60, y=250)
-
-# Entry widget heading
-FilePathLabelTitle = Label(root, text = "Mfg. ID" , height = 1,  width = 8, relief = "flat", bg='SlateGray4', fg= 'white', font = ('Times', 11, 'bold'))
-FilePathLabelTitle.place(x=52, y=225)
-
-# WasMfg Connection heading
-WasMfgConnectionTitle = Label(root, text = "WasMfg" , height = 1,  width = 8, relief = "flat", bg='SlateGray4', fg= 'white', font = ('Times', 11, 'bold'))
-WasMfgConnectionTitle.place(x=587, y=77)
+mfgIdInput.place(x=20, y=100)
 
 # Connection to the database
 databaseHandle = database_connect()
@@ -65,23 +70,30 @@ if databaseHandle == -99:
 	WasMfgConnection = Canvas(root, height = 35, width = 35, bg = 'red' )
 	ErrorLogHandle.write(str(datetime.datetime.now()) + " : " + "Failed to connect to the database\n")
 else:
-	WasMfgConnection = Canvas(root, height = 35, width = 35, bg = 'lime green' )
-WasMfgConnection.place(x=595, y=100)
+	WasMfgConnection = Canvas(root, height = 30, width = 30, bg = 'lime green' )
+WasMfgConnection.place(x=548, y=31)
 
-# Field to diplay Messages
-MessageDisplay = Label(root, text = "" , height = 1, width = 47, borderwidth = 2, relief = "sunken", justify = LEFT)
-MessageDisplay.place(x=250, y=250)
+# Field to diplay Serial Number
+MessageDisplaySlNo = Label(root, text = "" , height = 1, width = 20, borderwidth = 3, relief = "sunken", justify = LEFT)
+MessageDisplaySlNo.place(x=415, y=99)
 
-# Messages Label heading
-FilePathLabelTitle = Label(root, text = "Messages" , height = 1,  width = 8, relief = "flat", bg='SlateGray4', fg= 'white', font = ('Times', 11, 'bold'))
-FilePathLabelTitle.place(x=252, y=225)
+# Field to diplay  Mfg ID 
+MessageDisplayMfgID = Label(root, text = "" , height = 1, width = 20, borderwidth = 3, relief = "sunken", justify = LEFT)
+MessageDisplayMfgID.place(x=217, y=99)
+
+# Label to diplay model file name and location
+FilePathLabel = Label(root, text = "" , height = 2, width = 60, borderwidth = 2, relief = "sunken")
+FilePathLabel.place(x=20, y=30)
+
+# Field to diplay Messages 
+MessagesLabel = Label(root, text = "" , height = 15, width = 70, borderwidth = 1, relief = "sunken")
+MessagesLabel.place(x=19, y=150)
 
 # Main program begins
 def startTest(mfgID):
 	# Insert Switcher here
-	mfgID = Enter_Mfg_ID(mfgIdInput, MessageDisplay)
-	Sln = Serial_Number(databaseHandle, mfgID)
-	print(Sln)
+	mfgID = Enter_Mfg_ID(mfgIdInput, MessageDisplayMfgID)
+	Sln = Serial_Number(databaseHandle, mfgID, MessageDisplaySlNo)
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)

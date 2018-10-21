@@ -3,5 +3,5 @@
 def Enter_Mfg_ID(mfgIdInput, MessageDisplay):
 	mfgId = mfgIdInput.get()
 	mfgIdInput.delete(0, 'end')
-	MessageDisplay.config(anchor = 'w', text = str('Mfg. ID of UUT : ' + mfgId))
+	MessageDisplay.config(anchor = 'w', text = str( mfgId))
 	return mfgId
