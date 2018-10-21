@@ -1,5 +1,8 @@
 # Serial_Number
 
+# Added code to display serial number
+
+
 def Serial_Number(databaseHandle, mfgID, MessageDisplaySlNo):
 	databaseHandle.execute("Select distinct SerialNumber from dbo.TestEvent WHERE MfgSerialNumber = ?", mfgID)
 	serialNumber = databaseHandle.fetchall()
