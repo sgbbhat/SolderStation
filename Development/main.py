@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 
+# Import general modules
+import datetime
 from tkinter import filedialog
 from tkinter import *
-from database_connect import database_connect
-from execute_query_SELECT import execute_query_SELECT
 from tkinter import messagebox 
-from readINI import readINI
-from Enter_Mfg_ID import Enter_Mfg_ID
-from Serial_Number import Serial_Number
 
-import datetime
+# Import Database Modules 
+from DatabaseQuery.database_connect import database_connect
+from DatabaseQuery.execute_query_SELECT import execute_query_SELECT
+from Settings.readINI import readINI
+
+# Import Test Modules 
+from Tests.Enter_Mfg_ID import Enter_Mfg_ID
+from Tests.Serial_Number import Serial_Number
 
 def showDialogButton():
 	folder_path = filedialog.askopenfilename(initialdir = ModelDirectory , title = "Select Model File", filetypes = (("text files", "*.txt") , ("all files", "*.*")))
