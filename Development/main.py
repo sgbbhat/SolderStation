@@ -101,10 +101,12 @@ MessagesLabel.place(x=19, y=150)
 # Main program begins
 def startTest(mfgID):
 	global modelFileContent
-	# Insert Switcher here
-	mfgID = Enter_Mfg_ID(mfgIdInput, MessageDisplayMfgID)
-	Sln = Serial_Number(databaseHandle, mfgID, MessageDisplaySlNo)
-	print(modelFileContent)
+	if(bool(modelFileContent) == False):
+		messagebox.showerror("Error" , "Model file not selected")
+	else:
+		# Insert Switcher here
+		mfgID = Enter_Mfg_ID(mfgIdInput, MessageDisplayMfgID)
+		Sln = Serial_Number(databaseHandle, mfgID, MessageDisplaySlNo)
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)
