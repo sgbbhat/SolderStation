@@ -17,7 +17,17 @@ from Settings.readINI import readINI
 
 # Import Test Modules 
 from Tests.Enter_Mfg_ID import Enter_Mfg_ID
+from Tests.Verify_PN import Verify_PN
+from Tests.Process_Enforcement import Process_Enforcement
+from Tests.BAT1_Voltage import BAT1_Voltage
+from Tests.BAT2_Voltage import BAT2_Voltage
+from Tests.RST1_Voltage import RST1_Voltage
+from Tests.RST2_Voltage import RST2_Voltage
+from Tests.Wakeup_Pulse import Wakeup_Pulse
 from Tests.Serial_Number import Serial_Number
+from Tests.Test_Time import Test_Time
+from Tests.Log_Test_Data_SQL import Log_Test_Data_SQL
+from Tests.switcher import Select_Test
 
 # Import Graphics Module
 from Graphics.createLabel import CreateLabel
@@ -100,13 +110,11 @@ MessagesLabel.place(x=19, y=150)
 
 # Main program begins
 def startTest(mfgID):
+	mfgID = Last_ScannedMfgID(mfgIdInput, MessageDisplayMfgID)
+	Sln = Serial_Number(databaseHandle, mfgID, MessageDisplaySlNo)
 	global modelFileContent
 	if(bool(modelFileContent) == False):
 		messagebox.showerror("Error" , "Model file not selected")
-	else:
-		# Insert Switcher here
-		mfgID = Enter_Mfg_ID(mfgIdInput, MessageDisplayMfgID)
-		Sln = Serial_Number(databaseHandle, mfgID, MessageDisplaySlNo)
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)
