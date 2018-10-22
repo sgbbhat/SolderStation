@@ -5,10 +5,14 @@ import datetime
 from tkinter import filedialog
 from tkinter import *
 from tkinter import messagebox 
+from collections import OrderedDict
 
-# Import Database Modules 
+# Import Database Modules showDialogButton
 from DatabaseQuery.database_connect import database_connect
 from DatabaseQuery.execute_query_SELECT import execute_query_SELECT
+
+# Import from Settings Modules 
+from Settings.readmodel import readModel
 from Settings.readINI import readINI
 
 # Import Test Modules 
@@ -18,10 +22,15 @@ from Tests.Serial_Number import Serial_Number
 # Import Graphics Module
 from Graphics.createLabel import CreateLabel
 
+modelFileContent = OrderedDict()
+
 def showDialogButton():
+	global modelFileContent
 	folder_path = filedialog.askopenfilename(initialdir = ModelDirectory , title = "Select Model File", filetypes = (("text files", "*.txt") , ("all files", "*.*")))
 	FilePathLabel.config(anchor = 'w', text = folder_path)
-	
+	modelFilepath = FilePathLabel.cget("text")
+	modelFileContent = readModel(modelFilepath)
+
 root = Tk()
 
 # Read INI file
@@ -91,9 +100,11 @@ MessagesLabel.place(x=19, y=150)
 
 # Main program begins
 def startTest(mfgID):
+	global modelFileContent
 	# Insert Switcher here
 	mfgID = Enter_Mfg_ID(mfgIdInput, MessageDisplayMfgID)
 	Sln = Serial_Number(databaseHandle, mfgID, MessageDisplaySlNo)
+	print(modelFileContent)
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)
