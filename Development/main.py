@@ -31,9 +31,7 @@ from Tests.Serial_Number import Serial_Number
 from Tests.Test_Time import Test_Time
 from Tests.Log_Test_Data_SQL import Log_Test_Data_SQL
 from Tests.Get_Serial_Number import getSerialNumber
-
-def defaultfun():
-	print("Default")
+from Tests.defaultfun import defaultfun
 
 def Select_Test(name):
 	return {
@@ -136,7 +134,7 @@ def startTest(mfgID):
 		if key == "" or bool(val) == False or key == 'name':
 			pass
 		else:
-			Select_Test(key)()
+			Select_Test(key)(key, val, databaseHandle, mfgID, MessagesLabel)
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)

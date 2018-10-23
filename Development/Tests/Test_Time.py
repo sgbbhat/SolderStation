@@ -1,4 +1,4 @@
 import time
 
-def Test_Time():
+def Test_Time(key, val, databaseHandle, mfgID, MessagesLabel):
 	print("Running Test Time")
