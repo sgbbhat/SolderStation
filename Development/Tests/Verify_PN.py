@@ -1,4 +1,4 @@
 #Verify_PN
 
 def Verify_PN():
-	return 'Returning Verify PN'
+	print('Running Verify PN')

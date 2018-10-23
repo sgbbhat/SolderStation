@@ -1,6 +1,5 @@
 [Test Table]
 Name,					Type,				Min Spec, 	Max Spec, 	Unit, 	Resol, 	Audit, 	Setup
-Enter Mfg ID,				Action,				1,			1,				,	0,		1.00,	None
 Verify PN,				Test,				-1,			1,				,	0,		1.00,	None
 Process Enforcement,		Test,				-1,			1,				,	0,		1.00,	None
 BAT1 Voltage,			Test,				5.8,			6.5,			V,		1,		1.00,	None

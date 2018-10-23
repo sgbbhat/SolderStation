@@ -15,15 +15,11 @@ from DatabaseQuery.execute_query_SELECT import execute_query_SELECT
 from Settings.readmodel import readModel
 from Settings.readINI import readINI
 
-# Import Test Modules 
-from Tests.switcher import Select_Test
-
 # Import Graphics Module
 from Graphics.createLabel import CreateLabel
 
-# Import from Tests 
+# Import Test Modules 
 from Tests.Last_ScannedMfgID import Last_ScannedMfgID
-from Tests.Enter_Mfg_ID import Enter_Mfg_ID
 from Tests.Verify_PN import Verify_PN
 from Tests.Process_Enforcement import Process_Enforcement
 from Tests.BAT1_Voltage import BAT1_Voltage
@@ -35,6 +31,23 @@ from Tests.Serial_Number import Serial_Number
 from Tests.Test_Time import Test_Time
 from Tests.Log_Test_Data_SQL import Log_Test_Data_SQL
 from Tests.Get_Serial_Number import getSerialNumber
+
+def defaultfun():
+	print("Default")
+
+def Select_Test(name):
+	return {
+		"VerifyPN" : Verify_PN, 
+		"ProcessEnforcement" : Process_Enforcement,
+		"BAT1Voltage" : BAT1_Voltage,
+		"BAT2Voltage" : BAT2_Voltage,
+		"RST1Voltage" : RST1_Voltage,
+		"RST2Voltage" : RST2_Voltage,
+		"WakeupPulse" : Wakeup_Pulse,
+		"SerialNumber" : Serial_Number, 
+		"TestTime" : Test_Time, 
+		"LogTestData_SQL" : Log_Test_Data_SQL,
+		}.get(name, defaultfun)
 
 modelFileContent = OrderedDict()
 
@@ -120,10 +133,10 @@ def startTest(mfgID):
 	if(bool(modelFileContent) == False):
 		messagebox.showerror("Error" , "Model file not selected")
 	for key, val in modelFileContent.items():
-		if key == "" or bool(val) == False:
+		if key == "" or bool(val) == False or key == 'name':
 			pass
 		else:
-			print(key + " -> " + str(val))
+			Select_Test(key)()
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)
