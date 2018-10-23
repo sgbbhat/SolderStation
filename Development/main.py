@@ -16,6 +16,13 @@ from Settings.readmodel import readModel
 from Settings.readINI import readINI
 
 # Import Test Modules 
+from Tests.switcher import Select_Test
+
+# Import Graphics Module
+from Graphics.createLabel import CreateLabel
+
+# Import from Tests 
+from Tests.Last_ScannedMfgID import Last_ScannedMfgID
 from Tests.Enter_Mfg_ID import Enter_Mfg_ID
 from Tests.Verify_PN import Verify_PN
 from Tests.Process_Enforcement import Process_Enforcement
@@ -27,10 +34,7 @@ from Tests.Wakeup_Pulse import Wakeup_Pulse
 from Tests.Serial_Number import Serial_Number
 from Tests.Test_Time import Test_Time
 from Tests.Log_Test_Data_SQL import Log_Test_Data_SQL
-from Tests.switcher import Select_Test
-
-# Import Graphics Module
-from Graphics.createLabel import CreateLabel
+from Tests.Get_Serial_Number import getSerialNumber
 
 modelFileContent = OrderedDict()
 
@@ -111,10 +115,15 @@ MessagesLabel.place(x=19, y=150)
 # Main program begins
 def startTest(mfgID):
 	mfgID = Last_ScannedMfgID(mfgIdInput, MessageDisplayMfgID)
-	Sln = Serial_Number(databaseHandle, mfgID, MessageDisplaySlNo)
+	Sln = getSerialNumber(databaseHandle, mfgID, MessageDisplaySlNo)
 	global modelFileContent
 	if(bool(modelFileContent) == False):
 		messagebox.showerror("Error" , "Model file not selected")
+	for key, val in modelFileContent.items():
+		if key == "" or bool(val) == False:
+			pass
+		else:
+			print(key + " -> " + str(val))
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)
