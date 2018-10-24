@@ -14,7 +14,7 @@ Log Test Data_SQL,		Action,				0,			0,				,	0,		1.00,	None
 [Disabled Tests]
 
 [General]
-Part_No=PCA-1300-123
+Part_No, PCA-1300-123
 FG Part_No=ERW-1300-302
 Unit Type=100W Encoder
 Notes=""

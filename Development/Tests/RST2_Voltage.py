@@ -1,4 +1,4 @@
 # RST_Voltage
 
-def RST2_Voltage(key, val, databaseHandle, mfgID, MessagesLabel):
+def RST2_Voltage(key, val, databaseHandle, mfgID, MessagesLabel, modelFileContent):
 	print('Running RST2 Voltage')

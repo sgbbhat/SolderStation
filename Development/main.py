@@ -120,7 +120,8 @@ FilePathLabel = Label(root, text = "" , height = 2, width = 60, borderwidth = 2,
 FilePathLabel.place(x=20, y=30)
 
 # Field to diplay Messages 
-MessagesLabel = Label(root, text = "" , height = 15, width = 70, borderwidth = 1, relief = "sunken")
+MessagesLabel = Text(root, height = 15, width = 80, bd = 1, relief = "sunken", bg = 'gray70')
+MessagesLabel.insert(INSERT, "Name,				Min Spec,  Measurement,  Max Spec,  Result" )
 MessagesLabel.place(x=19, y=150)
 
 # Main program begins
@@ -134,7 +135,7 @@ def startTest(mfgID):
 		if key == "" or bool(val) == False or key == 'name':
 			pass
 		else:
-			Select_Test(key)(key, val, databaseHandle, mfgID, MessagesLabel)
+			Select_Test(key)(key, val, databaseHandle, mfgID, MessagesLabel, modelFileContent)
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)

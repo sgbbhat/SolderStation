@@ -1,4 +1,4 @@
 
-def defaultfun(key, val, databaseHandle, mfgID, MessagesLabel):
-	print("Default")
+def defaultfun(key, val, databaseHandle, mfgID, MessagesLabel, ModelFileContent):
+	pass
 
