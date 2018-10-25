@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Import general modules
-import datetime
+import time
 from tkinter import filedialog
 from tkinter import *
 from tkinter import messagebox 
@@ -147,6 +147,7 @@ ResultText.place(x=505, y=150)
 
 # Main program begins
 def startTest(mfgID):
+	testStartTime = time.time()
 	mfgID = Last_ScannedMfgID(mfgIdInput, MessageDisplayMfgID, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText)
 	Sln = getSerialNumber(databaseHandle, mfgID, MessageDisplaySlNo)
 	global modelFileContent
@@ -156,7 +157,7 @@ def startTest(mfgID):
 		if key == "" or bool(val) == False or key == 'name':
 			pass
 		else:
-			Select_Test(key)(key, val, databaseHandle, mfgID, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent)
+			Select_Test(key)(key, val, databaseHandle, mfgID, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime)
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)
