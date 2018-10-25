@@ -6,6 +6,7 @@ from tkinter import filedialog
 from tkinter import *
 from tkinter import messagebox 
 from collections import OrderedDict
+from tkinter import END, LEFT, BOTH
 
 # Import Database Modules showDialogButton
 from DatabaseQuery.database_connect import database_connect
@@ -119,10 +120,30 @@ MessageDisplayMfgID.place(x=217, y=99)
 FilePathLabel = Label(root, text = "" , height = 2, width = 60, borderwidth = 2, relief = "sunken")
 FilePathLabel.place(x=20, y=30)
 
-# Field to diplay Messages 
-MessagesLabel = Text(root, height = 15, width = 80, bd = 1, relief = "sunken", bg = 'gray70')
-MessagesLabel.insert(INSERT, "Name,				Min Spec,  Measurement,  Max Spec,  Result" )
-MessagesLabel.place(x=19, y=150)
+# Field to diplay TestName 
+TestNameText = Text(root, height = 15, width = 40, bd = 1, relief = "sunken", bg = 'gray78')
+TestNameText.insert(INSERT, "Name" )
+TestNameText.place(x=19, y=150)
+
+# Field to diplay MinLimitText 
+MinLimitText = Text(root, height = 15, width = 8, bd = 1, relief = "sunken", bg = 'gray78')
+MinLimitText.insert(INSERT, "Min Spec" )
+MinLimitText.place(x=300, y=150)
+
+# Field to diplay MaxLimitText
+MaxLimitText = Text(root, height = 15, width = 8, bd = 1, relief = "sunken", bg = 'gray78')
+MaxLimitText.insert(INSERT, "Max Spec" )
+MaxLimitText.place(x=360, y=150)
+
+# Field to diplay MeasurementText
+MeasurementText = Text(root, height = 15, width = 12, bd = 1, relief = "sunken", bg = 'gray78')
+MeasurementText.insert(INSERT, "Measurement" )
+MeasurementText.place(x=420, y=150)
+
+# Field to diplay ResultText
+ResultText = Text(root, height = 15, width = 10, bd = 1, relief = "sunken", bg = 'gray78')
+ResultText.insert(INSERT, "Result" )
+ResultText.place(x=505, y=150)
 
 # Main program begins
 def startTest(mfgID):
@@ -135,7 +156,7 @@ def startTest(mfgID):
 		if key == "" or bool(val) == False or key == 'name':
 			pass
 		else:
-			Select_Test(key)(key, val, databaseHandle, mfgID, MessagesLabel, modelFileContent)
+			Select_Test(key)(key, val, databaseHandle, mfgID, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent)
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)
