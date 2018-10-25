@@ -147,7 +147,7 @@ ResultText.place(x=505, y=150)
 
 # Main program begins
 def startTest(mfgID):
-	mfgID = Last_ScannedMfgID(mfgIdInput, MessageDisplayMfgID)
+	mfgID = Last_ScannedMfgID(mfgIdInput, MessageDisplayMfgID, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText)
 	Sln = getSerialNumber(databaseHandle, mfgID, MessageDisplaySlNo)
 	global modelFileContent
 	if(bool(modelFileContent) == False):

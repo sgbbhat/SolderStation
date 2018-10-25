@@ -1,5 +1,5 @@
 #Verify_PN
-from tkinter import END, LEFT, BOTH
+from tkinter import END
 
 def Verify_PN(key, val, databaseHandle, mfgID, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent):
 	databaseHandle.execute("Select distinct ProcessFlowKey from dbo.TestEvent WHERE MfgSerialNumber = ? AND ProcessFlowKey != 0", mfgID)
@@ -7,8 +7,11 @@ def Verify_PN(key, val, databaseHandle, mfgID, TestNameText, MinLimitText, MaxLi
 	CurrentPartNumber = modelFileContent['Part_No']
 	CurrentProcessStep = 'Board Test'
 	databaseHandle.execute("Select PrePartNumber from dbo.ProcessEnforcementStep WHERE ProcessFlowKey = ? AND CurrentPartNumber = ? AND CurrentProcessStep = ?", int((ProcessFlowKey[0])[0]), CurrentPartNumber[0], CurrentProcessStep)
-	PrePartNumber = databaseHandle.fetchall()	
-	if (PrePartNumber[0])[0] == CurrentPartNumber[0] :
+	PrePartNumber = databaseHandle.fetchall()
+	if bool(PrePartNumber) == False:
+		result = "Fail"
+		measurement = '0'
+	elif (PrePartNumber[0])[0] == CurrentPartNumber[0] :
 		result = "Pass"
 		measurement = '1'
 	else:
