@@ -34,7 +34,7 @@ def Log_Test_Data_SQL(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLim
 
 	# Insert in to Test Events Table
 	timeNow = datetime.datetime.now() 
-	databaseHandle.execute("INSERT INTO dbo.TestEvent (SerialNumber, MfgSerialNumber, PartNumber, ProcessFlowKey, BatchKey, DataCategoryID, StationConfigKey, TestPosition, Attempt, Passed, TestDate, Comment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", (Sln[0])[0], mfgID, (modelFileContent['Part_No'])[0], int((ProcessFlowKey[0])[0]), 1, 'P', 123, 1, "" , int(Passed), timeNow, "")
+	databaseHandle.execute("INSERT INTO dbo.TestEvent (SerialNumber, MfgSerialNumber, PartNumber, ProcessFlowKey, BatchKey, DataCategoryID, StationConfigKey, TestPosition, Attempt, Passed, TestDate, Comment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", (Sln[0])[0], mfgID, (modelFileContent['Part_No'])[0], int((ProcessFlowKey[0])[0]), 1, 'P', 501, 1, "" , int(Passed), timeNow, "")
 	databaseHandle.commit()
 	
 	# Get Test Event Key
