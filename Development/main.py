@@ -157,7 +157,7 @@ def startTest(mfgID):
 		if key == "" or bool(val) == False or key == 'name':
 			pass
 		else:
-			Select_Test(key)(key, val, databaseHandle, mfgID, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime)
+			Select_Test(key)(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime)
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)

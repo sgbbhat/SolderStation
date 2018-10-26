@@ -1,7 +1,7 @@
 # Process_Enforcement
 from tkinter import END
 
-def Process_Enforcement(key, val, databaseHandle, mfgID, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime):
+def Process_Enforcement(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime):
 	databaseHandle.execute("Select distinct ProcessFlowKey from dbo.TestEvent WHERE MfgSerialNumber = ? AND ProcessFlowKey != 0", mfgID)
 	ProcessFlowKey = databaseHandle.fetchall()
 	CurrentPartNumber = modelFileContent['Part_No']

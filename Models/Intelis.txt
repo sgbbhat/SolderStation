@@ -2,8 +2,8 @@
 Name,					Type,				Min Spec, 	Max Spec, 	Unit, 	Resol, 	Audit, 	Setup
 Verify PN,				Test,				1,			1,				,	0,		1.00,	None
 Process Enforcement,		Test,				1,			1,				,	0,		1.00,	None
-BAT1 Voltage,			Test,				5.8,			6.5,			V,		1,		1.00,	None
-BAT2 Voltage,			Test,				5.8,			6.5,			V,		1,		1.00,	None
+BAT1 Voltage,			Test,				0.8,			6.5,			V,		1,		1.00,	None
+BAT2 Voltage,			Test,				0.8,			6.5,			V,		1,		1.00,	None
 RST1 Voltage,			Test,				0,			3,			V,		1,		1.00,	None
 RST2 Voltage,			Test,				0,			3,			V,		1,		1.00,	None
 Wakeup Pulse, 			Test, 				1, 			1, 			,		0,		1.00,	None
