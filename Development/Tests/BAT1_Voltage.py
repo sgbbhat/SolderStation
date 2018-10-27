@@ -2,11 +2,22 @@
 from tkinter import END
 from os import *
 import time 
+import RPi.GPIO as GPIO
+
+def setupGPIO():
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setup(14, GPIO.IN)
+	GPIO.add_event_detect(14, GPIO.BOTH)
+	
+	while(not GPIO.input(14)):
+		print("Waiting")
+	
+	GPIO.cleanup()
 
 def BAT1_Voltage(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime):
+	setupGPIO()
 	rawScale = popen('megaio 0 aread 1').read()
 	measurement = float(rawScale)/4095.0 * 3.3
-	
 	if measurement > float(val[1]) and measurement < float(val[2]) :
 		result = 'Pass'
 	else:
@@ -31,3 +42,5 @@ def BAT1_Voltage(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitTex
 	# Display Result
 	ResultText.insert(END, "\n")
 	ResultText.insert(END, result)
+
+	
