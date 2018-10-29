@@ -3,8 +3,8 @@ from tkinter import END
 from os import *
 import time 
 
-def RST1_Voltage(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime):
-	rawScale = popen('megaio 0 aread 3').read()
+def RST2_Voltage_High(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime):
+	rawScale = popen('megaio 0 aread 4').read()
 	measurement = float(rawScale)/4095.0 * 3.3
 	
 	if measurement > float(val[1]) and measurement < float(val[2]) :

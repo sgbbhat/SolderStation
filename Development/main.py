@@ -25,8 +25,10 @@ from Tests.Verify_PN import Verify_PN
 from Tests.Process_Enforcement import Process_Enforcement
 from Tests.BAT1_Voltage import BAT1_Voltage
 from Tests.BAT2_Voltage import BAT2_Voltage
-from Tests.RST1_Voltage import RST1_Voltage
-from Tests.RST2_Voltage import RST2_Voltage
+from Tests.RST1_Voltage_Low import RST1_Voltage_Low
+from Tests.RST2_Voltage_Low import RST2_Voltage_Low
+from Tests.RST1_Voltage_High import RST1_Voltage_High
+from Tests.RST2_Voltage_High import RST2_Voltage_High
 from Tests.Wakeup_Pulse import Wakeup_Pulse
 from Tests.Serial_Number import Serial_Number
 from Tests.Test_Time import Test_Time
@@ -40,8 +42,10 @@ def Select_Test(name):
 		"ProcessEnforcement" : Process_Enforcement,
 		"BAT1Voltage" : BAT1_Voltage,
 		"BAT2Voltage" : BAT2_Voltage,
-		"RST1Voltage" : RST1_Voltage,
-		"RST2Voltage" : RST2_Voltage,
+		"RST1VoltageLow" : RST1_Voltage_Low,
+		"RST2VoltageLow" : RST2_Voltage_Low,
+		"RST1VoltageHigh" : RST1_Voltage_High,
+		"RST2VoltageHigh" : RST2_Voltage_High,
 		"WakeupPulse" : Wakeup_Pulse,
 		"SerialNumber" : Serial_Number, 
 		"TestTime" : Test_Time, 

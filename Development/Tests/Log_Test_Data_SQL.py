@@ -11,10 +11,14 @@ def getTestDefinitionKey(TestName):
 		return 1100
 	elif TestName == 'BAT2Voltage' :
 		return 1101
-	elif TestName == 'RST1Voltage' :
+	elif TestName == 'RST1VoltageLow' :
 		return 1617
-	elif TestName == 'RST2Voltage' :
+	elif TestName == 'RST2VoltageLow' :
 		return 1618
+	elif TestName == 'RST1VoltageHigh' :
+		return 1619
+	elif TestName == 'RST2VoltageHigh' :
+		return 1620
 	elif TestName == 'TestTime' :
 		return 44 
 
@@ -34,7 +38,7 @@ def Log_Test_Data_SQL(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLim
 
 	# Insert in to Test Events Table
 	timeNow = datetime.datetime.now() 
-	databaseHandle.execute("INSERT INTO dbo.TestEvent (SerialNumber, MfgSerialNumber, PartNumber, ProcessFlowKey, BatchKey, DataCategoryID, StationConfigKey, TestPosition, Attempt, Passed, TestDate, Comment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", (Sln[0])[0], mfgID, (modelFileContent['Part_No'])[0], int((ProcessFlowKey[0])[0]), 1, 'P', 501, 1, "" , int(Passed), timeNow, "")
+	databaseHandle.execute("INSERT INTO dbo.TestEvent (SerialNumber, MfgSerialNumber, PartNumber, ProcessFlowKey, BatchKey, DataCategoryID, StationConfigKey, TestPosition, Attempt, Passed, TestDate, Comment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", (Sln[0])[0], mfgID, (modelFileContent['Part_No'])[0], int((ProcessFlowKey[0])[0]), 1, 'P', 501 , 1, "" , int(Passed), timeNow, "")
 	databaseHandle.commit()
 	
 	# Get Test Event Key
