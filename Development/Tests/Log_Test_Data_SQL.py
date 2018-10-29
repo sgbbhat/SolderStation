@@ -22,7 +22,12 @@ def getTestDefinitionKey(TestName):
 	elif TestName == 'TestTime' :
 		return 44 
 
-def Log_Test_Data_SQL(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime):
+def Log_Test_Data_SQL(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
+	if OperationMode == 'Experiment' :
+		OperationModeExp = 'E'
+	elif OperationMode == 'Production' :
+		OperationModeExp = 'P'	
+
 	databaseHandle.execute("Select distinct ProcessFlowKey from dbo.TestEvent WHERE MfgSerialNumber = ? AND ProcessFlowKey != 0", mfgID)
 	ProcessFlowKey = databaseHandle.fetchall()	
 	TestNameTextContent = TestNameText.get(1.0, END)
@@ -38,7 +43,7 @@ def Log_Test_Data_SQL(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLim
 
 	# Insert in to Test Events Table
 	timeNow = datetime.datetime.now() 
-	databaseHandle.execute("INSERT INTO dbo.TestEvent (SerialNumber, MfgSerialNumber, PartNumber, ProcessFlowKey, BatchKey, DataCategoryID, StationConfigKey, TestPosition, Attempt, Passed, TestDate, Comment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", (Sln[0])[0], mfgID, (modelFileContent['Part_No'])[0], int((ProcessFlowKey[0])[0]), 1, 'P', 501 , 1, "" , int(Passed), timeNow, "")
+	databaseHandle.execute("INSERT INTO dbo.TestEvent (SerialNumber, MfgSerialNumber, PartNumber, ProcessFlowKey, BatchKey, DataCategoryID, StationConfigKey, TestPosition, Attempt, Passed, TestDate, Comment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", (Sln[0])[0], mfgID, (modelFileContent['Part_No'])[0], int((ProcessFlowKey[0])[0]), 1, OperationModeExp, 501 , 1, "" , int(Passed), timeNow, OperationModeInput)
 	databaseHandle.commit()
 	
 	# Get Test Event Key

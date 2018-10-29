@@ -13,7 +13,7 @@ def setupGPIO():
 		time.sleep(0.1)		
 	GPIO.cleanup()
 
-def BAT1_Voltage(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime):
+def BAT1_Voltage(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	setupGPIO()
 	rawScale = popen('megaio 0 aread 1').read()
 	measurement = float(rawScale)/4095.0 * 3.3

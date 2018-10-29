@@ -71,27 +71,46 @@ ErrorLogHandle = open(ErrorLog, "a")
 
 # Window settings
 root.title(StationName)
-root.geometry("650x400")
+root.geometry("650x500")
 root.resizable(0,0)
 root.configure(background='SlateGray4')
 
-# Label to diplay model file heading
+# Row#1 : Label to diplay model file heading
 FilePathLabelTitle = CreateLabel(root, "FilePathLabelTitle",  "Model"  , 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 18, 7)
 
-# Entry widget heading
-MfgIDLabelTitle = CreateLabel(root, "MfgIDLabelTitle",  "Mfg. ID"  , 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 18, 75)
-
-# Label to diplay Messages heading
-MessagesLabelTitle = CreateLabel(root, "MessagesLabelTitle",  "Messages"  , 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 18, 125)
-
-# Messages Label heading
-LastScannedLabelTitle = CreateLabel(root, "LastScannedLabelTitle",  "Last Scanned Mfg. ID"  , 1,  20, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 217, 75)
-
-# Messages Label heading
-LastScannedSerialNumberTitle = CreateLabel(root, "LastScannedSerialNumberTitle",  "Serial Number"  , 1,  25, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 416, 75)
-
-# WasMfg Connection heading
+# Row#1 :  WasMfg Connection heading
 WasMfgConnectionTitle = CreateLabel(root, "WasMfgConnectionTitle",  "WasMfg"  , 1,  8, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 543, 7)
+
+# Chose Experiment or Production Mode
+tkvar = StringVar(root)
+choises = {"Production", "Experiment"}
+tkvar.set("Production")
+OperationMode = OptionMenu(root, tkvar,  *choises)
+OperationMode.place(x=21, y=90)
+OperationMode.config(relief = "sunken", bd= 0)
+
+# Entry widget for operation mode comment
+OperationModeInput = Entry(root, bd = '3' , relief = "sunken")
+OperationModeInput.place(x=130, y=92)
+
+# Entry widget for entering lot number
+LotNumvberInput = Entry(root, bd = '3' , relief = "sunken")
+LotNumvberInput.place(x=415, y=92)
+
+# Row#2 : Entry widget heading
+MfgIDLabelTitle = CreateLabel(root, "MfgIDLabelTitle",  "Mfg. ID"  , 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 18, 125)
+
+# Row#2 : Messages Label heading
+LastScannedLabelTitle = CreateLabel(root, "LastScannedLabelTitle",  "Last Scanned Mfg. ID"  , 1,  20, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 217, 125)
+
+# Row#2 :  Messages Label heading
+LastScannedSerialNumberTitle = CreateLabel(root, "LastScannedSerialNumberTitle",  "Serial Number"  , 1,  25, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 416, 125)
+
+# Row#3 :  Label to diplay Messages heading
+MessagesLabelTitle = CreateLabel(root, "MessagesLabelTitle",  "Messages"  , 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 18, 175)
+
+# Row#2 : Battery Lot # heading
+LotNumLabelTitle = CreateLabel(root, "LotNumLabelTitle",  "Battery Lot#", 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 416, 70)
 
 # Select model file Button 
 SelectModelButtonImage = PhotoImage(file = 'SelectFile.png')
@@ -101,7 +120,7 @@ SelectModelButton.place(x=510, y=30)
 
 # Entry widget
 mfgIdInput = Entry(root, bd = '2' , relief = "sunken")
-mfgIdInput.place(x=20, y=100)
+mfgIdInput.place(x=20, y=150)
 
 # Connection to the database
 databaseHandle = database_connect()
@@ -114,11 +133,11 @@ WasMfgConnection.place(x=548, y=31)
 
 # Field to diplay Serial Number
 MessageDisplaySlNo = Label(root, text = "" , height = 1, width = 20, borderwidth = 3, relief = "sunken", justify = LEFT)
-MessageDisplaySlNo.place(x=415, y=99)
+MessageDisplaySlNo.place(x=415, y=149)
 
 # Field to diplay  Mfg ID 
 MessageDisplayMfgID = Label(root, text = "" , height = 1, width = 20, borderwidth = 3, relief = "sunken", justify = LEFT)
-MessageDisplayMfgID.place(x=217, y=99)
+MessageDisplayMfgID.place(x=217, y=149)
 
 # Label to diplay model file name and location
 FilePathLabel = Label(root, text = "" , height = 2, width = 60, borderwidth = 2, relief = "sunken")
@@ -127,33 +146,36 @@ FilePathLabel.place(x=20, y=30)
 # Field to diplay TestName 
 TestNameText = Text(root, height = 15, width = 40, bd = 1, relief = "sunken", bg = 'gray78')
 TestNameText.insert(INSERT, "Name" )
-TestNameText.place(x=19, y=150)
+TestNameText.place(x=19, y=200)
 
 # Field to diplay MinLimitText 
 MinLimitText = Text(root, height = 15, width = 8, bd = 1, relief = "sunken", bg = 'gray78')
 MinLimitText.insert(INSERT, "Min Spec" )
-MinLimitText.place(x=300, y=150)
+MinLimitText.place(x=300, y=200)
 
 # Field to diplay MaxLimitText
 MaxLimitText = Text(root, height = 15, width = 8, bd = 1, relief = "sunken", bg = 'gray78')
 MaxLimitText.insert(INSERT, "Max Spec" )
-MaxLimitText.place(x=360, y=150)
+MaxLimitText.place(x=360, y=200)
 
 # Field to diplay MeasurementText
 MeasurementText = Text(root, height = 15, width = 12, bd = 1, relief = "sunken", bg = 'gray78')
 MeasurementText.insert(INSERT, "Measurement" )
-MeasurementText.place(x=420, y=150)
+MeasurementText.place(x=420, y=200)
 
 # Field to diplay ResultText
 ResultText = Text(root, height = 15, width = 10, bd = 1, relief = "sunken", bg = 'gray78')
 ResultText.insert(INSERT, "Result" )
-ResultText.place(x=505, y=150)
+ResultText.place(x=505, y=200)
 
 # Main program begins
 def startTest(mfgID):
 	testStartTime = time.time()
 	mfgID = Last_ScannedMfgID(mfgIdInput, MessageDisplayMfgID, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText)
 	Sln = getSerialNumber(databaseHandle, mfgID, MessageDisplaySlNo)
+	OpMode = OperationMode.cget("text")
+	OpModeText = OperationModeInput.cget("text")
+	LotNumvber = LotNumvberInput.cget("text")
 	global modelFileContent
 	if(bool(modelFileContent) == False):
 		messagebox.showerror("Error" , "Model file not selected")
@@ -161,7 +183,7 @@ def startTest(mfgID):
 		if key == "" or bool(val) == False or key == 'name':
 			pass
 		else:
-			Select_Test(key)(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime)
+			Select_Test(key)(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OpMode, OpModeText, LotNumvber)
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)

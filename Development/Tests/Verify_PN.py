@@ -1,7 +1,7 @@
 #Verify_PN
 from tkinter import END
 
-def Verify_PN(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime):
+def Verify_PN(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	databaseHandle.execute("Select distinct ProcessFlowKey from dbo.TestEvent WHERE MfgSerialNumber = ? AND ProcessFlowKey != 0", mfgID)
 	ProcessFlowKey = databaseHandle.fetchall()
 	CurrentPartNumber = modelFileContent['Part_No']

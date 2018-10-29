@@ -1,4 +1,4 @@
 
-def defaultfun(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText,  ModelFileContent, testStartTime):
+def defaultfun(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText,  ModelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	pass
 

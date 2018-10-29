@@ -1,7 +1,7 @@
 import time
 from tkinter import END
 
-def Test_Time(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime):
+def Test_Time(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	endTime = time.time()
 
 	measurement = int(endTime - testStartTime)
