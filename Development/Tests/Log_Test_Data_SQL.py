@@ -21,8 +21,8 @@ def getTestDefinitionKey(TestName):
 		return 1620
 	elif TestName == 'Test Time' :
 		return 44 
-	elif TestName == 'Test Time' :
-		return 
+	elif TestName == 'Startup Detection' :
+		return 1622
 
 def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	if OperationMode == 'Experiment' :
@@ -68,5 +68,8 @@ def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, 
 			databaseHandle.execute("INSERT INTO dbo.TestEventResult (TestEventKey, TestDefinitionKey, Measurement, MinLimit, MaxLimit, Passed) VALUES (?, ?, ?, ?, ?, ?)",TestEventKey, testDefKey, meas, minlim, maxlim, logPass)
 			databaseHandle.commit()
 
+	# args = mfgID, LotNumvberInput
+	
+	# databaseHandle.execute("{call InsertComponentTraceability(?)}", args)
 	return True
 		

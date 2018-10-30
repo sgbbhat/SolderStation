@@ -10,7 +10,7 @@ Battery1 Voltage,			Test,				0.8,			6.5,			V,		1,		1.00,	None
 Battery2 Voltage,			Test,				0.8,			6.5,			V,		1,		1.00,	None
 Reset1 Voltage High,		Test,				0,			3,			V,		1,		1.00,	None
 Reset2 Voltage High,		Test,				0,			3,			V,		1,		1.00,	None
-Wakeup Pulse, 			Test, 				1, 			1, 			,		0,		1.00,	None
+Startup Detection, 		Test, 				1, 			1, 			,		0,		1.00,	None
 Serial Number,			Test,				70000000,	78999999,		,	0,		1.00,	None
 Test Time,				Test,				0,			999,		sec	,	0,		1.00,	None
 Log Test Data_SQL,		Action,				0,			0,				,	0,		1.00,	None

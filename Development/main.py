@@ -49,7 +49,7 @@ def Select_Test(name):
 		"Reset2VoltageLow" : RST2_Voltage_Low,
 		"Reset1VoltageHigh" : RST1_Voltage_High,
 		"Reset2VoltageHigh" : RST2_Voltage_High,
-		"WakeupPulse" : Wakeup_Pulse,
+		"StartupDetection" : Wakeup_Pulse,
 		"SerialNumber" : Serial_Number, 
 		"TestTime" : Test_Time, 
 		"LogTestData_SQL" : Log_Test_Data_SQL,
@@ -182,7 +182,7 @@ def startTest(mfgID):
 	mfgID = Last_ScannedMfgID(mfgIdInput, MessageDisplayMfgID, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText)
 	Sln = getSerialNumber(databaseHandle, mfgID, MessageDisplaySlNo)
 	OpMode = OperationMode.cget("text")
-	OpModeText = OperationModeInput.cget("text")
+	OpModeText = OperationModeInput.get()
 	LotNumvber = LotNumvberInput.cget("text")
 	global modelFileContent
 	if(bool(modelFileContent) == False):

@@ -11,13 +11,16 @@ def setcancelPressed():
 
 def Info_Messagebox_Before(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):		
 	GPIO.add_event_detect(14, GPIO.RISING, bouncetime = 1000)		
-	top = Toplevel()
+	top = Toplevel(master = root)
+	top.geometry("%dx%d%+d%+d" % (200, 150,750,450))
 	top.title("Waiting for user input...")
-	msg = Message(top, text = "Load Board, Then press Finger Switch")
-	msg.pack()
-	
+	msg = Message(top, text = "Load Board, Then Press Finger Switch To Start", width = 200)
+	msg.place(x=0,y=0)
+
 	buttonCancel = Button(top, text = "Cancel", command = setcancelPressed)
-	buttonCancel.pack()
+	buttonCancel.place(x=50,y=70)
+	
+	top.attributes('-topmost', 'true')	
 	
 	root.update()
 
