@@ -7,6 +7,7 @@ from tkinter import *
 from tkinter import messagebox 
 from collections import OrderedDict
 from tkinter import END, LEFT, BOTH
+import RPi.GPIO as GPIO
 
 # Import Database Modules showDialogButton
 from DatabaseQuery.database_connect import database_connect
@@ -55,6 +56,10 @@ def Select_Test(name):
 		}.get(name, defaultfun)
 
 modelFileContent = OrderedDict()
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(14, GPIO.IN)
+GPIO.add_event_detect(14, GPIO.BOTH)	
 
 def showDialogButton():
 	global modelFileContent

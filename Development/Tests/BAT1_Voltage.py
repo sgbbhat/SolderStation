@@ -2,7 +2,6 @@
 from tkinter import END
 from os import *
 import time 
-import RPi.GPIO as GPIO
 
 #def setupGPIO():
 #	GPIO.setmode(GPIO.BCM)

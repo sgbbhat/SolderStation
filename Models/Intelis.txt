@@ -2,6 +2,7 @@
 Name,					Type,				Min Spec, 	Max Spec, 	Unit, 	Resol, 	Audit, 	Setup
 Verify PN,				Test,				1,			1,				,	0,		1.00,	None
 Process Enforcement,		Test,				1,			1,				,	0,		1.00,	None
+Info Messagebox, 		Action,				1,			1,			V,		1,		1.00,	None
 RST1 Voltage Low,		Test,				0,			2,			V,		1,		1.00,	None
 RST2 Voltage Low,		Test,				0,			2,			V,		1,		1.00,	None
 Info Messagebox, 		Action,				1,			1,			V,		1,		1.00,	None
