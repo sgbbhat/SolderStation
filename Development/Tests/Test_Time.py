@@ -1,7 +1,7 @@
 import time
 from tkinter import END
 
-def Test_Time(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
+def Test_Time(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	endTime = time.time()
 
 	measurement = int(endTime - testStartTime)
@@ -29,3 +29,8 @@ def Test_Time(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, 
 	# Display Result
 	ResultText.insert(END, "\n")
 	ResultText.insert(END, result)
+
+	if result == "Fail":
+		return False
+	else:
+		return True

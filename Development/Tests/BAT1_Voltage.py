@@ -4,17 +4,17 @@ from os import *
 import time 
 import RPi.GPIO as GPIO
 
-def setupGPIO():
-	GPIO.setmode(GPIO.BCM)
-	GPIO.setup(14, GPIO.IN)
-	GPIO.add_event_detect(14, GPIO.BOTH)
+#def setupGPIO():
+#	GPIO.setmode(GPIO.BCM)
+#	GPIO.setup(14, GPIO.IN)
+#	GPIO.add_event_detect(14, GPIO.BOTH)
 	
-	while(not GPIO.input(14)):
-		time.sleep(0.1)		
-	GPIO.cleanup()
+#	while(not GPIO.input(14)):
+#		time.sleep(0.1)		
+#	GPIO.cleanup()
 
-def BAT1_Voltage(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
-	setupGPIO()
+def BAT1_Voltage(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
+	#setupGPIO()
 	rawScale = popen('megaio 0 aread 1').read()
 	measurement = float(rawScale)/4095.0 * 3.3
 	if measurement > float(val[1]) and measurement < float(val[2]) :
@@ -42,4 +42,7 @@ def BAT1_Voltage(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitTex
 	ResultText.insert(END, "\n")
 	ResultText.insert(END, result)
 
-	
+	if result == "Fail":
+		return False
+	else:
+		return True	

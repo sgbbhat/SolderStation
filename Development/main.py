@@ -35,6 +35,7 @@ from Tests.Test_Time import Test_Time
 from Tests.Log_Test_Data_SQL import Log_Test_Data_SQL
 from Tests.Get_Serial_Number import getSerialNumber
 from Tests.defaultfun import defaultfun
+from Tests.Info_Messagebox import Info_Messagebox
 
 def Select_Test(name):
 	return {
@@ -50,6 +51,7 @@ def Select_Test(name):
 		"SerialNumber" : Serial_Number, 
 		"TestTime" : Test_Time, 
 		"LogTestData_SQL" : Log_Test_Data_SQL,
+		"InfoMessagebox" : Info_Messagebox, 
 		}.get(name, defaultfun)
 
 modelFileContent = OrderedDict()
@@ -183,7 +185,10 @@ def startTest(mfgID):
 		if key == "" or bool(val) == False or key == 'name':
 			pass
 		else:
-			Select_Test(key)(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OpMode, OpModeText, LotNumvber)
+			testResult = Select_Test(key)(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OpMode, OpModeText, LotNumvber)
+			root.update()
+			if testResult == False:
+				break
 
 # Binding ENTER key event
 root.bind('<Return>', startTest)

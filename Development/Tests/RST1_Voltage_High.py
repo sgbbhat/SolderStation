@@ -3,7 +3,7 @@ from tkinter import END
 from os import *
 import time 
 
-def RST1_Voltage_High(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
+def RST1_Voltage_High(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	rawScale = popen('megaio 0 aread 3').read()
 	measurement = float(rawScale)/4095.0 * 3.3
 	
@@ -31,3 +31,8 @@ def RST1_Voltage_High(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLim
 	# Display Result
 	ResultText.insert(END, "\n")
 	ResultText.insert(END, result)
+
+	if result == "Fail":
+		return False
+	else:
+		return True

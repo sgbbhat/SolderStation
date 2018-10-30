@@ -1,7 +1,7 @@
 # Process_Enforcement
 from tkinter import END
 
-def Process_Enforcement(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
+def Process_Enforcement(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	databaseHandle.execute("Select distinct ProcessFlowKey from dbo.TestEvent WHERE MfgSerialNumber = ? AND ProcessFlowKey != 0", mfgID)
 	ProcessFlowKey = databaseHandle.fetchall()
 	CurrentPartNumber = modelFileContent['Part_No']
@@ -19,7 +19,7 @@ def Process_Enforcement(key, val, databaseHandle, mfgID, Sln, TestNameText, MinL
 	PrePartNumberTestResult_lookup = [item for item in PrePartNumberTestResult if 1 in item]
 	if bool(PrePartNumberTestResult_lookup) == False:
 		result = "Fail"
-		measurement = '0'			
+		measurement = '0'		
 	elif (PrePartNumberTestResult_lookup[0])[0] == 1 :
 		result = "Pass"
 		measurement = '1'
@@ -46,3 +46,9 @@ def Process_Enforcement(key, val, databaseHandle, mfgID, Sln, TestNameText, MinL
 	# Display Result
 	ResultText.insert(END, "\n")
 	ResultText.insert(END, result)
+
+	if result == "Fail":
+		return False
+	else:
+		return True
+

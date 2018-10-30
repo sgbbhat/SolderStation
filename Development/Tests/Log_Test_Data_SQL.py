@@ -22,7 +22,7 @@ def getTestDefinitionKey(TestName):
 	elif TestName == 'TestTime' :
 		return 44 
 
-def Log_Test_Data_SQL(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
+def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	if OperationMode == 'Experiment' :
 		OperationModeExp = 'E'
 	elif OperationMode == 'Production' :
@@ -65,4 +65,6 @@ def Log_Test_Data_SQL(key, val, databaseHandle, mfgID, Sln, TestNameText, MinLim
 			#print(test + " " +  maxlim + " " + minlim + " " + meas + " " + res + " " + str(testDefKey))
 			databaseHandle.execute("INSERT INTO dbo.TestEventResult (TestEventKey, TestDefinitionKey, Measurement, MinLimit, MaxLimit, Passed) VALUES (?, ?, ?, ?, ?, ?)",TestEventKey, testDefKey, meas, minlim, maxlim, logPass)
 			databaseHandle.commit()
+
+	return True
 		
