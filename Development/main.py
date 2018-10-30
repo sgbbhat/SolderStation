@@ -36,29 +36,31 @@ from Tests.Test_Time import Test_Time
 from Tests.Log_Test_Data_SQL import Log_Test_Data_SQL
 from Tests.Get_Serial_Number import getSerialNumber
 from Tests.defaultfun import defaultfun
-from Tests.Info_Messagebox import Info_Messagebox
+from Tests.Info_Messagebox_Before import Info_Messagebox_Before
+from Tests.Info_Messagebox_After import Info_Messagebox_After
 
 def Select_Test(name):
 	return {
 		"VerifyPN" : Verify_PN, 
 		"ProcessEnforcement" : Process_Enforcement,
-		"BAT1Voltage" : BAT1_Voltage,
-		"BAT2Voltage" : BAT2_Voltage,
-		"RST1VoltageLow" : RST1_Voltage_Low,
-		"RST2VoltageLow" : RST2_Voltage_Low,
-		"RST1VoltageHigh" : RST1_Voltage_High,
-		"RST2VoltageHigh" : RST2_Voltage_High,
+		"Battery1Voltage" : BAT1_Voltage,
+		"Battery2Voltage" : BAT2_Voltage,
+		"Reset1VoltageLow" : RST1_Voltage_Low,
+		"Reset2VoltageLow" : RST2_Voltage_Low,
+		"Reset1VoltageHigh" : RST1_Voltage_High,
+		"Reset2VoltageHigh" : RST2_Voltage_High,
 		"WakeupPulse" : Wakeup_Pulse,
 		"SerialNumber" : Serial_Number, 
 		"TestTime" : Test_Time, 
 		"LogTestData_SQL" : Log_Test_Data_SQL,
-		"InfoMessagebox" : Info_Messagebox, 
+		"InfoMessageboxBefore" : Info_Messagebox_Before, 
+		"InfoMessageboxAfter" : Info_Messagebox_After, 
 		}.get(name, defaultfun)
 
 modelFileContent = OrderedDict()
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(14, GPIO.IN)
+GPIO.setup(14, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
 def showDialogButton():
 	global modelFileContent
@@ -192,6 +194,7 @@ def startTest(mfgID):
 			testResult = Select_Test(key)(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OpMode, OpModeText, LotNumvber)
 			root.update()
 			if testResult == False:
+				messagebox.showerror("Error", "Test Failed")
 				break
 
 # Binding ENTER key event

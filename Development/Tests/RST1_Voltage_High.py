@@ -2,6 +2,7 @@
 from tkinter import END
 from os import *
 import time 
+import re
 
 def RST1_Voltage_High(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	rawScale = popen('megaio 0 aread 3').read()
@@ -12,9 +13,11 @@ def RST1_Voltage_High(root, key, val, databaseHandle, mfgID, Sln, TestNameText, 
 	else:
 		result = 'Fail'
 
+	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
+
 	# Display Test Name
 	TestNameText.insert(END, "\n")
-	TestNameText.insert(END, key)
+	TestNameText.insert(END, mod_TestName)
 
 	# Display Min Limit
 	MinLimitText.insert(END, "\n")

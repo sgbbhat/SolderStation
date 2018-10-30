@@ -3,30 +3,32 @@ from tkinter import END
 import datetime
 
 def getTestDefinitionKey(TestName):
-	if TestName == 'VerifyPN':
+	if TestName == 'Verify PN':
 		return 488
-	elif TestName == 'ProcessEnforcement':
+	elif TestName == 'Process Enforcement':
 		return 31
-	elif TestName == 'BAT1Voltage' :
+	elif TestName == 'Battery1 Voltage' :
 		return 1100
-	elif TestName == 'BAT2Voltage' :
+	elif TestName == 'Battery2 Voltage' :
 		return 1101
-	elif TestName == 'RST1VoltageLow' :
+	elif TestName == 'Reset1 Voltage Low' :
 		return 1617
-	elif TestName == 'RST2VoltageLow' :
+	elif TestName == 'Reset2 Voltage Low' :
 		return 1618
-	elif TestName == 'RST1VoltageHigh' :
+	elif TestName == 'Reset1 Voltage High' :
 		return 1619
-	elif TestName == 'RST2VoltageHigh' :
+	elif TestName == 'Reset2 Voltage High' :
 		return 1620
-	elif TestName == 'TestTime' :
+	elif TestName == 'Test Time' :
 		return 44 
+	elif TestName == 'Test Time' :
+		return 
 
 def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	if OperationMode == 'Experiment' :
 		OperationModeExp = 'E'
 	elif OperationMode == 'Production' :
-		OperationModeExp = 'P'	
+		OperationModeExp = 'P'
 
 	databaseHandle.execute("Select distinct ProcessFlowKey from dbo.TestEvent WHERE MfgSerialNumber = ? AND ProcessFlowKey != 0", mfgID)
 	ProcessFlowKey = databaseHandle.fetchall()	

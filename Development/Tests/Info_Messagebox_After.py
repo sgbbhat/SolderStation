@@ -9,7 +9,7 @@ def setcancelPressed():
 	global cancelPressed
 	cancelPressed = False
 
-def Info_Messagebox(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):		
+def Info_Messagebox_After(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):		
 	GPIO.add_event_detect(14, GPIO.RISING, bouncetime = 500)		
 	top = Toplevel()
 	top.title("Waiting for user input...")
@@ -25,6 +25,7 @@ def Info_Messagebox(root, key, val, databaseHandle, mfgID, Sln, TestNameText, Mi
 		time.sleep(0.1)
 	
 	GPIO.remove_event_detect(14)
+
 	if cancelPressed == False:
 		top.destroy()
 		return False

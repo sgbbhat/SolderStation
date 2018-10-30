@@ -1,5 +1,6 @@
 import time
 from tkinter import END
+import re
 
 def Test_Time(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	endTime = time.time()
@@ -10,9 +11,10 @@ def Test_Time(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimit
 	else:
 		result = 'Fail'
 
+	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
 	# Display Test Name
 	TestNameText.insert(END, "\n")
-	TestNameText.insert(END, key)
+	TestNameText.insert(END, mod_TestName)
 
 	# Display Min Limit
 	MinLimitText.insert(END, "\n")

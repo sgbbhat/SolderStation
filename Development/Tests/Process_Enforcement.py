@@ -1,5 +1,6 @@
 # Process_Enforcement
 from tkinter import END
+import re
 
 def Process_Enforcement(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	databaseHandle.execute("Select distinct ProcessFlowKey from dbo.TestEvent WHERE MfgSerialNumber = ? AND ProcessFlowKey != 0", mfgID)
@@ -27,9 +28,10 @@ def Process_Enforcement(root, key, val, databaseHandle, mfgID, Sln, TestNameText
 		result = "Fail"
 		measurement = '0'
 
+	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
 	# Display Test Name
 	TestNameText.insert(END, "\n")
-	TestNameText.insert(END, key)
+	TestNameText.insert(END, mod_TestName)
 
 	# Display Min Limit
 	MinLimitText.insert(END, "\n")
