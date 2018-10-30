@@ -59,7 +59,6 @@ modelFileContent = OrderedDict()
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(14, GPIO.IN)
-GPIO.add_event_detect(14, GPIO.BOTH)	
 
 def showDialogButton():
 	global modelFileContent

@@ -9,7 +9,8 @@ def setcancelPressed():
 	global cancelPressed
 	cancelPressed = False
 
-def Info_Messagebox(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):	
+def Info_Messagebox(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):		
+	GPIO.add_event_detect(14, GPIO.RISING, bouncetime = 500)		
 	top = Toplevel()
 	top.title("Waiting for user input...")
 	msg = Message(top, text = "Load Board, Then press Finger Switch")
@@ -23,6 +24,7 @@ def Info_Messagebox(root, key, val, databaseHandle, mfgID, Sln, TestNameText, Mi
 	while(not GPIO.input(14)):
 		time.sleep(0.1)
 	
+	GPIO.remove_event_detect(14)
 	if cancelPressed == False:
 		top.destroy()
 		return False
