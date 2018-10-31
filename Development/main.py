@@ -183,7 +183,7 @@ def startTest(mfgID):
 	Sln = getSerialNumber(databaseHandle, mfgID, MessageDisplaySlNo)
 	OpMode = OperationMode.cget("text")
 	OpModeText = OperationModeInput.get()
-	LotNumvber = LotNumvberInput.cget("text")
+	LotNumvber = LotNumvberInput.get()
 	global modelFileContent
 	if(bool(modelFileContent) == False):
 		messagebox.showerror("Error" , "Model file not selected")

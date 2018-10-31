@@ -10,6 +10,8 @@ def setcancelPressed():
 	cancelPressed = False
 
 def Info_Messagebox_Before(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):		
+	global cancelPressed	
+	cancelPressed = True
 	GPIO.add_event_detect(14, GPIO.RISING, bouncetime = 1000)		
 	top = Toplevel(master = root)
 	top.geometry("%dx%d%+d%+d" % (200, 150,750,450))
@@ -25,7 +27,7 @@ def Info_Messagebox_Before(root, key, val, databaseHandle, mfgID, Sln, TestNameT
 	root.update()
 
 	while(not GPIO.input(14)):
-		time.sleep(0.1)
+		continue
 	
 	GPIO.remove_event_detect(14)
 
