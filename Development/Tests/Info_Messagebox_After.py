@@ -8,14 +8,19 @@ cancelPressed = True
 def setcancelPressed():	
 	global cancelPressed
 	cancelPressed = False
+	pass
 
 def Info_Messagebox_After(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):		
-	GPIO.add_event_detect(14, GPIO.RISING, bouncetime = 500)		
+	global cancelPressed
+	cancelPressed = True	
+	GPIO.add_event_detect(14, GPIO.FALLING, bouncetime = 1000)		
 	top = Toplevel(master = root)
 	top.geometry("%dx%d%+d%+d" % (200, 200,750,450))
 	top.title("Waiting for user input...")
+	top.resizable(0,0)
+
 	msg = Message(top, text = "Press Finger Switch When Solder Is Complete To Check Assembly\n \n CLAMP MUST BE DOWN", width = 200)
-	msg.place(x=0,y=0)
+	msg.place(x=10,y=10)
 
 	buttonCancel = Button(top, text = "Cancel", command = setcancelPressed)
 	buttonCancel.place(x=50,y=100)
@@ -23,9 +28,12 @@ def Info_Messagebox_After(root, key, val, databaseHandle, mfgID, Sln, TestNameTe
 	top.attributes('-topmost', 'true')	
 	root.update()
 
-	while(not GPIO.input(14)):
-		time.sleep(0.1)
+	while(not GPIO.input(14) and (cancelPressed == True)):
+		top.update()
+		continue
 	
+	time.sleep(0.5)	
+
 	GPIO.remove_event_detect(14)
 
 	if cancelPressed == False:

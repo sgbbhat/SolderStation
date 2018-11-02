@@ -195,6 +195,7 @@ def startTest(mfgID):
 			root.update()
 			if testResult == False:
 				messagebox.showerror("Error", "Test Failed")
+				Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OpMode, OpModeText, LotNumvber)
 				break
 
 # Binding ENTER key event

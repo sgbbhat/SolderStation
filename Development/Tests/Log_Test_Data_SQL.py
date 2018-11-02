@@ -74,13 +74,16 @@ def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, 
 		vendor, PartNumber, Datecode = LotNumvberInput.split(',')
 		databaseHandle.execute("Select ComponentInforID from dbo.ComponentInfor WHERE Vendor = ? AND PartNumber = ? AND DateCode = ? ", vendor, PartNumber, Datecode)
 		if ((databaseHandle.fetchall())[0])[0] == "" :
-			databaseHandle.execute("INSERT INTO dbo.ComponentInfor (Vendor, PartNumber, DateCode, InertDate) VALUES (?, ?, ?, ?, ?, ?)",vendor, PartNumber, Datecode, datetime.datetime.now())
+			databaseHandle.execute("INSERT INTO dbo.ComponentInfor (Vendor, PartNumber, DateCode, InertDate) VALUES (?, ?, ?, ?)",vendor, PartNumber, Datecode, datetime.datetime.now())
 			databaseHandle.commit()
 			databaseHandle.execute("Select ComponentInforID from dbo.ComponentInfor WHERE Vendor = ? AND PartNumber = ? AND DateCode = ? ", vendor, PartNumber, Datecode)
-			databaseHandle.execute("INSERT INTO dbo.TestEventResult (TestEventKey, TestDefinitionKey, Measurement, MinLimit, MaxLimit, Passed) VALUES (?, ?, ?, ?, ?, ?)",TestEventKey, testDefKey, meas, minlim, maxlim, logPass)
+			CompInforID = ((databaseHandle.fetchall())[0])[0] 
+			databaseHandle.execute("INSERT INTO dbo.ComponentTraceability (MfgSerialNumber, ComponentInforID, InsertDate) VALUES (?, ?, ?)",mfgID, CompInforID, datetime.datetime.now())
 			databaseHandle.commit()
 		else:
-			databaseHandle.execute("INSERT INTO dbo.TestEventResult (TestEventKey, TestDefinitionKey, Measurement, MinLimit, MaxLimit, Passed) VALUES (?, ?, ?, ?, ?, ?)",TestEventKey, testDefKey, meas, minlim, maxlim, logPass)
+			databaseHandle.execute("Select ComponentInforID from dbo.ComponentInfor WHERE Vendor = ? AND PartNumber = ? AND DateCode = ? ", vendor, PartNumber, Datecode)
+			CompInforID = ((databaseHandle.fetchall())[0])[0] 
+			databaseHandle.execute("INSERT INTO dbo.ComponentTraceability (MfgSerialNumber, ComponentInforID, InsertDate) VALUES (?, ?, ?)",mfgID, CompInforID, datetime.datetime.now())
 			databaseHandle.commit()
 
 	return True
