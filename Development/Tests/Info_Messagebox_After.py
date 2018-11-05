@@ -8,6 +8,7 @@ cancelPressed = True
 def setcancelPressed():	
 	global cancelPressed
 	cancelPressed = False
+	messagebox.showerror("Error", "Testing Aborted")
 	pass
 
 def Info_Messagebox_After(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):		
@@ -15,7 +16,7 @@ def Info_Messagebox_After(root, key, val, databaseHandle, mfgID, Sln, TestNameTe
 	cancelPressed = True	
 	GPIO.add_event_detect(14, GPIO.FALLING, bouncetime = 1000)		
 	top = Toplevel(master = root)
-	top.geometry("%dx%d%+d%+d" % (200, 200,750,450))
+	top.geometry("%dx%d%+d%+d" % (200, 170,750,450))
 	top.title("Waiting for user input...")
 	top.resizable(0,0)
 
