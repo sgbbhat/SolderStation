@@ -38,6 +38,7 @@ from Tests.Get_Serial_Number import getSerialNumber
 from Tests.defaultfun import defaultfun
 from Tests.Info_Messagebox_Before import Info_Messagebox_Before
 from Tests.Info_Messagebox_After import Info_Messagebox_After
+from Tests.displayResult import displayResult
 
 def Select_Test(name):
 	return {

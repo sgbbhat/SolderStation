@@ -7,10 +7,7 @@ cancelPressed = True
 
 def setcancelPressed():
 	global cancelPressed
-	messagebox.showerror(title = 'Error', message = "TestingCidy072(
-Cidy!$password234
-!$password234
- Aborted")
+	messagebox.showerror(title = 'Error', message = "Test Aborted")
 	cancelPressed = False
 	pass
 

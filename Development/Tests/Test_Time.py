@@ -1,6 +1,7 @@
 import time
 from tkinter import END
 import re
+from Tests.displayResult import displayResult
 
 def Test_Time(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	endTime = time.time()
@@ -12,26 +13,11 @@ def Test_Time(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimit
 		result = 'Fail'
 
 	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
-	# Display Test Name
-	TestNameText.insert(END, "\n")
-	TestNameText.insert(END, mod_TestName)
 
-	# Display Min Limit
-	MinLimitText.insert(END, "\n")
-	MinLimitText.insert(END, str(val[1]))
+	# Display test results
+	displayResult(TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, mod_TestName, val, measurement, result)
 
-	# Display Max Limit
-	MaxLimitText.insert(END, "\n")
-	MaxLimitText.insert(END, str(val[2]))
-	
-	# Display Measurement
-	MeasurementText.insert(END, "\n")
-	MeasurementText.insert(END, measurement)
-
-	# Display Result
-	ResultText.insert(END, "\n")
-	ResultText.insert(END, result)
-
+	# Return test results
 	if result == "Fail":
 		return False
 	else:
