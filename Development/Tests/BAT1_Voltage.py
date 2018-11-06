@@ -8,12 +8,9 @@ from Tests.displayResult import displayResult
 def BAT1_Voltage(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	rawScale = popen('megaio 0 aread 1').read()
 	measurement = float(rawScale)/4095.0 * 3.3
-	if measurement > float(val[1]) and measurement < float(val[2]) :
-		result = 'Pass'
-	else:
-		result = 'Fail'
-
 	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
+
+	result = 'Pass' if measurement > float(val[1]) and measurement < float(val[2]) else 'Fail'
 
 	# Display tests and results
 	displayResult(TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, mod_TestName, val, measurement, result)

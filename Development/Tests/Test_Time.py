@@ -7,10 +7,7 @@ def Test_Time(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimit
 	endTime = time.time()
 
 	measurement = int(endTime - testStartTime)
-	if measurement >= int(val[1]) and measurement <= int(val[2]):
-		result = 'Pass'
-	else:
-		result = 'Fail'
+	result = 'Pass' if measurement >= int(val[1]) and measurement <= int(val[2]) else 'Fail'
 
 	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
 
