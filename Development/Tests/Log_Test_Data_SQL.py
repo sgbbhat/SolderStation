@@ -45,34 +45,27 @@ def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, 
 
 	# Insert in to Test Events Table
 	timeNow = datetime.datetime.now() 
-	testEventParam = ((Sln[0])[0], mfgID, (modelFileContent['Part_No'])[0], 1 ,int((ProcessFlowKey[0])[0]), OperationModeExp, 501 , 1, "" , int(Passed), timeNow, OperationModeInput)
+	testEventParam = (Sln, mfgID, (modelFileContent['Part_No'])[0], 1 ,int((ProcessFlowKey[0])[0]), OperationModeExp, 501 , 1, "" , int(Passed), timeNow, OperationModeInput)
 	databaseHandle.execute("{CALL [dbo].[insertTestEvent] (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}", testEventParam)
 	TestEventKey = int(((databaseHandle.fetchall())[0])[0])
 	databaseHandle.commit()
 
-	# databaseHandle.execute("INSERT INTO dbo.TestEvent (SerialNumber, MfgSerialNumber, PartNumber, ProcessFlowKey, BatchKey, DataCategoryID, StationConfigKey, TestPosition, Attempt, Passed, TestDate, Comment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", (Sln[0])[0], mfgID, (modelFileContent['Part_No'])[0], int((ProcessFlowKey[0])[0]), 1, OperationModeExp, 501 , 1, "" , int(Passed), timeNow, OperationModeInput)
-	# databaseHandle.commit()
-	
-	# Get Test Event Key
-	#databaseHandle.execute("Select TestEventKey from dbo.TestEvent WHERE TestDate = ? AND PartNumber = ? AND MfgSerialNumber = ? ", timeNow, (modelFileContent['Part_No'])[0], mfgID)
-	#TestEventKey = int(((databaseHandle.fetchall())[0])[0])
-
 	# Insert in to Test Event Results
-	#databaseHandle.commit()
-	#for test, minlim, maxlim, meas, res in zip(TestNameTextContent.splitlines(), MinLimitTextContent.splitlines(), MaxLimitTextContent.splitlines(), MeasurementTextContent.splitlines(), searchResult.splitlines()) :
-	#	if test == 'Name':
-	#		pass
-	#	else:
-	#		testDefKey = getTestDefinitionKey(test)
-	#		if res == 'Pass' :
-	#			logPass = 1
-	#		else:
-	#			logPass = 0
-			#print(test + " " +  maxlim + " " + minlim + " " + meas + " " + res + " " + str(testDefKey))
-	#		databaseHandle.execute("INSERT INTO dbo.TestEventResult (TestEventKey, TestDefinitionKey, Measurement, MinLimit, MaxLimit, Passed) VALUES (?, ?, ?, ?, ?, ?)",TestEventKey, testDefKey, meas, minlim, maxlim, logPass)
-	#		databaseHandle.commit()
+	for test, minlim, maxlim, meas, res in zip(TestNameTextContent.splitlines(), MinLimitTextContent.splitlines(), MaxLimitTextContent.splitlines(), MeasurementTextContent.splitlines(), searchResult.splitlines()) :
+		if test == 'Name':
+			pass
+		else:
+			testDefKey = getTestDefinitionKey(test)
+			if res == 'Pass' :
+				logPass = 1
+			else:
+				logPass = 0
+			testEventResultsParam = (TestEventKey, testDefKey, meas, minlim, maxlim, logPass)
+			databaseHandle.execute("{CALL [dbo].[insertTestEventResult] (?, ?, ?, ?, ?, ?)}", testEventResultsParam)
+			databaseHandle.commit()
 
-	if LotNumvberInput == "":
+	# Insert in to Component Traceability
+	if LotNumvberInput == "" :
 		pass
 	else :
 		vendor, PartNumber, Datecode = LotNumvberInput.split(',')

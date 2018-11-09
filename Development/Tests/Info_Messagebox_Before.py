@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import time
 import RPi.GPIO as GPIO
+from os import *
 
 cancelPressed = True
 
@@ -32,6 +33,11 @@ def Info_Messagebox_Before(root, key, val, databaseHandle, mfgID, Sln, TestNameT
 		top.update()
 		continue
 	time.sleep(0.5)
+	
+	# Hold Reset low while soldering 		
+	os.system('megaio 0 ocwrite 3 0')	
+	os.system('megaio 0 ocwrite 4 0')	
+
 	GPIO.remove_event_detect(14)
 	if cancelPressed == False:
 		top.destroy()

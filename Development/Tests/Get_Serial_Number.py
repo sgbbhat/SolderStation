@@ -1,6 +1,8 @@
+# Function runs the stored procedure "getSerialNumber" taking Manufacturing Serial Number as input
 
 def getSerialNumber(databaseHandle, mfgID, MessageDisplaySlNo):
-	databaseHandle.execute("Select distinct SerialNumber from dbo.TestEvent WHERE MfgSerialNumber = ? AND SerialNumber != 0", mfgID)
-	serialNumber = databaseHandle.fetchall()
-	MessageDisplaySlNo.config(text = str((serialNumber[0])[0]), anchor = 'w')
+	databaseHandle.execute("{CALL [dbo].[getSerialNumber] (?)}", mfgID)	
+	serialNumber = int(((databaseHandle.fetchall())[0])[0])
+	MessageDisplaySlNo.config(text = str(serialNumber), anchor = 'w')
+	databaseHandle.commit()
 	return serialNumber
