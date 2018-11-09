@@ -63,8 +63,6 @@ modelFileContent = OrderedDict()
 # Raspberry Pi GPIO setup
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(14, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(23, GPIO.OUT)
-GPIO.setup(24, GPIO.OUT)
 
 def showDialogButton():
 	global modelFileContent

@@ -1,10 +1,19 @@
 from tkinter import *
 from tkinter import messagebox
 import time
-import RPi.GPIO as GPIO
 from os import *
 
 cancelPressed = True
+currentState = 0
+valChanged = 0
+
+def compareState (current):
+	global currentState
+	if (int(current) == 0) :
+		return 0
+	else:
+		currentState = 0
+		return 1
 
 def setcancelPressed():
 	global cancelPressed
@@ -13,13 +22,16 @@ def setcancelPressed():
 	pass
 
 def Info_Messagebox_Before(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):		
-	global cancelPressed	
+	global cancelPressed
+	global valChanged
+	global currentState
+
 	cancelPressed = True
-	GPIO.add_event_detect(14, GPIO.FALLING, bouncetime = 1000)		
 	top = Toplevel(master = root)
 	top.geometry("%dx%d%+d%+d" % (200, 130,750,450))
 	top.title("Waiting for user input...")
 	top.resizable(0,0)
+
 	msg = Message(top, text = "LOAD BOARD, THEN PRESS FINGER SWITCH TO START.", width = 200)
 	msg.place(x=10,y=10)
 
@@ -29,16 +41,20 @@ def Info_Messagebox_Before(root, key, val, databaseHandle, mfgID, Sln, TestNameT
 	top.attributes('-topmost', 'true')	
 	root.update()
 
-	while(not GPIO.input(14) and (cancelPressed == True)):
+	while((int(valChanged == 0))  and (cancelPressed == True)):
+		currentState = popen('megaio 0 optread 1').read()
+		valChanged = compareState(currentState)
 		top.update()
 		continue
 	time.sleep(0.5)
-	
-	# Hold Reset low while soldering 		
-	os.system('megaio 0 ocwrite 3 0')	
-	os.system('megaio 0 ocwrite 4 0')	
 
-	GPIO.remove_event_detect(14)
+	# Hold Reset low while soldering 		
+	system('megaio 0 ocwrite 3 0')	
+	system('megaio 0 ocwrite 4 0')	
+
+	currentState = 0
+	valChanged = 0
+
 	if cancelPressed == False:
 		top.destroy()
 		return False
