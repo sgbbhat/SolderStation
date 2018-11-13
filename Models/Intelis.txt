@@ -1,19 +1,21 @@
 [Test Table]
-Name,					Type,				Min Spec, 	Max Spec, 	Unit, 	Resol, 	Audit, 	Setup
-Verify PN,				Test,				1,			1,				,	0,		1.00,	None
+Name,				Type,				Min Spec, 	Max Spec, 			Unit, 		Resol, 		Audit, 	Setup
+Verify PN,			Test,				1,			1,				,	0,		1.00,	None
 Process Enforcement,		Test,				1,			1,				,	0,		1.00,	None
 Info Messagebox Before, 	Action,				1,			1,			V,		1,		1.00,	None
 Reset1 Voltage Low,		Test,				0,			2,			V,		1,		1.00,	None
 Reset2 Voltage Low,		Test,				0,			2,			V,		1,		1.00,	None
-Info Messagebox After, 	Action,				1,			1,			V,		1,		1.00,	None
-Battery1 Voltage,			Test,				0.8,			6.5,			V,		1,		1.00,	None
-Battery2 Voltage,			Test,				0.8,			6.5,			V,		1,		1.00,	None
+Info Messagebox After, 		Action,				1,			1,			V,		1,		1.00,	None
+Battery1 Voltage,		Test,				0.8,			6.5,			V,		1,		1.00,	None
+Battery2 Voltage,		Test,				0.8,			6.5,			V,		1,		1.00,	None
+Info Messagebox After Bridge, 	Action,				1,			1,			V,		1,		1.00,	None
+Battery Voltage After Bridge,	Test,				0.8,			6.5,			V,		1,		1.00,	None
 Reset1 Voltage High,		Test,				0,			3,			V,		1,		1.00,	None
 Reset2 Voltage High,		Test,				0,			3,			V,		1,		1.00,	None
 Startup Detection, 		Test, 				1, 			1, 			,		0,		1.00,	None
-Serial Number,			Test,				70000000,	78999999,		,	0,		1.00,	None
-Test Time,				Test,				0,			999,		sec	,	0,		1.00,	None
-Log Test Data_SQL,		Action,				0,			0,				,	0,		1.00,	None
+Serial Number,			Test,				70000000,		78999999,		,		0,		1.00,	None
+Test Time,			Test,				0,			999,			sec,		0,		1.00,	None
+Log Test Data_SQL,		Action,				0,			0,			,		0,		1.00,	None
 
 [Disabled Tests]
 

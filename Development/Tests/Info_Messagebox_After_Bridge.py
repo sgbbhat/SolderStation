@@ -21,7 +21,7 @@ def setcancelPressed():
 	cancelPressed = False
 	pass
 
-def Info_Messagebox_After(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):		
+def Info_Messagebox_After_Bridge(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):		
 	global cancelPressed
 	global valChanged
 	global currentState
@@ -32,7 +32,7 @@ def Info_Messagebox_After(root, key, val, databaseHandle, mfgID, Sln, TestNameTe
 	top.title("Waiting for user input...")
 	top.resizable(0,0)
 
-	msg = Message(top, text = "Solder the betteries, Press Finger Switch When Solder Is Complete To Check Reverse Battery\n \n CLAMP MUST BE DOWN", width = 200)
+	msg = Message(top, text = "Solder the bridge, Press Finger Switch When Solder Is Complete To Check Assembly\n \n CLAMP MUST BE DOWN", width = 200)
 	msg.place(x=10,y=10)
 
 	buttonCancel = Button(top, text = "Cancel", command = setcancelPressed)

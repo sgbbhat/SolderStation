@@ -23,6 +23,8 @@ def getTestDefinitionKey(TestName):
 		return 44 
 	elif TestName == 'Startup Detection' :
 		return 1622
+	elif TestName == 'Battery Voltage After Bridge' :
+                return 1666
 
 def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	if OperationMode == 'Experiment' :

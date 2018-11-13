@@ -39,6 +39,8 @@ from Tests.defaultfun import defaultfun
 from Tests.Info_Messagebox_Before import Info_Messagebox_Before
 from Tests.Info_Messagebox_After import Info_Messagebox_After
 from Tests.displayResult import displayResult
+from Tests.Info_Messagebox_After_Bridge import Info_Messagebox_After_Bridge
+from Tests.Battery_Voltage_After_Bridge import Battery_Voltage_After_Bridge
 
 def Select_Test(name):
 	return {
@@ -55,7 +57,9 @@ def Select_Test(name):
 		"TestTime" : Test_Time, 
 		"LogTestData_SQL" : Log_Test_Data_SQL,
 		"InfoMessageboxBefore" : Info_Messagebox_Before, 
-		"InfoMessageboxAfter" : Info_Messagebox_After, 
+		"InfoMessageboxAfter" : Info_Messagebox_After,
+                "InfoMessageboxAfterBridge" : Info_Messagebox_After_Bridge,
+                "BatteryVoltageAfterBridge" : Battery_Voltage_After_Bridge,
 		}.get(name, defaultfun)
 
 modelFileContent = OrderedDict()
