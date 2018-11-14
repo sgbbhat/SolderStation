@@ -4,6 +4,7 @@ from os import *
 import time 
 import re
 from Tests.displayResult import displayResult
+from tkinter import messagebox 
 
 def BAT2_Voltage(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	rawScale = popen('megaio 0 aread 2').read()
@@ -14,9 +15,13 @@ def BAT2_Voltage(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLi
 
 	# Display Test and results
 	displayResult(TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, mod_TestName, val, measurement, result)
+	
+	Bat2Reverse = popen('megaio 0 optread 7').read()
+	if int(Bat2Reverse) == 1 :
+            messagebox.showerror("Error", "Battery 2 connected in Reverse")
 
 	# Return test results
-	if result == "Fail":
+	if result == "Fail" or int(Bat2Reverse) == 1 :
 		return False
 	else:
 		return True

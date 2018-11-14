@@ -48,10 +48,6 @@ def Info_Messagebox_After(root, key, val, databaseHandle, mfgID, Sln, TestNameTe
 		continue
 	time.sleep(0.5)	
 
-	# Release reset after soldering complete
-	# os.system('megaio 0 ocwrite 3 1')	
-	# os.system('megaio 0 ocwrite 4 1')	
-
 	currentState = 0
 	valChanged = 0
 	if cancelPressed == False:
