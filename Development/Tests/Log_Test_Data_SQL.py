@@ -25,6 +25,10 @@ def getTestDefinitionKey(TestName):
 		return 1622
 	elif TestName == 'Battery Voltage After Bridge' :
                 return 1666
+	elif TestName == 'Battery1 Reverse' :
+                return 1668
+	elif TestName == 'Battery2 Reverse' :
+                return 1669
 
 def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	if OperationMode == 'Experiment' :

@@ -8,7 +8,7 @@ from tkinter import messagebox
 
 def BAT1_Voltage(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	rawScale = popen('megaio 0 aread 1').read()
-	measurement = float(rawScale)/4095.0 * 3.3
+	measurement = float(rawScale)/4095.0 * 3.3 * 2.0
 	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
 
 	result = 'Pass' if measurement > float(val[1]) and measurement < float(val[2]) else 'Fail'

@@ -41,6 +41,8 @@ from Tests.Info_Messagebox_After import Info_Messagebox_After
 from Tests.displayResult import displayResult
 from Tests.Info_Messagebox_After_Bridge import Info_Messagebox_After_Bridge
 from Tests.Battery_Voltage_After_Bridge import Battery_Voltage_After_Bridge
+from Tests.BAT1_Reverse import BAT1_Reverse
+from Tests.BAT2_Reverse import BAT2_Reverse
 
 def Select_Test(name):
 	return {
@@ -48,6 +50,8 @@ def Select_Test(name):
 		"ProcessEnforcement" : Process_Enforcement,
 		"Battery1Voltage" : BAT1_Voltage,
 		"Battery2Voltage" : BAT2_Voltage,
+		"Battery1Reverse" : BAT1_Reverse,
+		"Battery2Reverse" : BAT2_Reverse,
 		"Reset1VoltageLow" : RST1_Voltage_Low,
 		"Reset2VoltageLow" : RST2_Voltage_Low,
 		"Reset1VoltageHigh" : RST1_Voltage_High,
