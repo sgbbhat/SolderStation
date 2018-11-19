@@ -49,10 +49,11 @@ def Info_Messagebox_After_Bridge(root, key, val, databaseHandle, mfgID, Sln, Tes
 	time.sleep(0.5)	
 
 	# Release reset after soldering complete
-	popen('megaio 0 ocwrite 3 0')
 	popen('megaio 0 ocwrite 4 0')
+	time.sleep(0.5)
+	popen('megaio 0 ocwrite 3 0')
 	
-	time.sleep(1)	
+	time.sleep(0.5)	
 
 	currentState = 0
 	valChanged = 0

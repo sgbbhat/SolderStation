@@ -6,9 +6,9 @@ import re
 from Tests.displayResult import displayResult
 from tkinter import messagebox 
 
-def BAT2_Voltage(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
+def BAT2_Voltage(root, key, val, databaseHandle, mfgID,Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	rawScale = popen('megaio 0 aread 2').read()
-	measurement = float(rawScale)/4095.0 * 3.65 * 2.0
+	measurement = float(rawScale)/4095.0 * 3.1 * 2.0
 	result = 'Pass' if measurement > float(val[1]) and measurement < float(val[2]) else 'Fail'
 
 	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)

@@ -9,15 +9,17 @@ def Process_Enforcement(root, key, val, databaseHandle, mfgID, Sln, TestNameText
 	CurrentPartNumber = modelFileContent['Part_No']
 	CurrentProcessStep = 'Board Test'
 	databaseHandle.execute("Select PrePartNumber from dbo.ProcessEnforcementStep WHERE ProcessFlowKey = ? AND CurrentPartNumber = ? AND CurrentProcessStep = ?", int((ProcessFlowKey[0])[0]), CurrentPartNumber[0], CurrentProcessStep)
-	PrePartNumber = databaseHandle.fetchall()	
+	PrePartNumber = databaseHandle.fetchall()
+	print(PrePartNumber)	
 	if bool(PrePartNumber) == False:
 		PrePartNumberTestResult_lookup = [()]
 		PrePartNumberTestResult = [()]
 		pass
 	else:
-		databaseHandle.execute("Select Passed from dbo.InProcess WHERE  MfgSerialNumber = ? AND PartNumber = ? " , mfgID, (PrePartNumber[0])[0])
+		databaseHandle.execute("Select Passed from dbo.InProcess WHERE  MfgSerialNumber = ? AND PartNumber = ? " , mfgID, 'ERG7100005-Curie')
 		PrePartNumberTestResult = databaseHandle.fetchall()
-		
+
+	print(PrePartNumberTestResult)
 	PrePartNumberTestResult_lookup = [item for item in PrePartNumberTestResult if 1 in item]
 	if bool(PrePartNumberTestResult_lookup) == False:
 		result = "Fail"
