@@ -10,6 +10,7 @@ Battery2 Reverse,		Test,				0,			0,			V,		1,		1.00,	None
 Battery1 Voltage,		Test,				5,			7,			V,		1,		1.00,	None
 Battery2 Voltage,		Test,				5,			7,			V,		1,		1.00,	None
 Info Messagebox After Bridge, 	Action,				1,			1,			V,		1,		1.00,	None
+Battery Voltage After Bridge, 	Test,				5,			7,			V,		1,		1.00,	None
 Reset1 Voltage High,		Test,				0,			3,			V,		1,		1.00,	None
 Reset2 Voltage High,		Test,				0,			3,			V,		1,		1.00,	None
 Test Time,			Test,				0,			999,			sec,		0,		1.00,	None

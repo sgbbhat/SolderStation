@@ -28,11 +28,11 @@ def Info_Messagebox_After_Bridge(root, key, val, databaseHandle, mfgID, Sln, Tes
 
 	cancelPressed = True	
 	top = Toplevel(master = root)
-	top.geometry("%dx%d%+d%+d" % (200, 170,750,450))
+	top.geometry("%dx%d%+d%+d" % (250, 170,800,450))
 	top.title("Waiting for user input...")
 	top.resizable(0,0)
 
-	msg = Message(top, text = "Solder the bridge, Press Finger Switch When Solder Is Complete To Check Assembly\n \n CLAMP MUST BE DOWN", width = 200)
+	msg = Message(top, text = "Solder the bridge, Press Finger Switch When Solder Is Complete To Check Assembly", width = 200)
 	msg.place(x=10,y=10)
 
 	buttonCancel = Button(top, text = "Cancel", command = setcancelPressed)

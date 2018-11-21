@@ -32,7 +32,7 @@ def Info_Messagebox_After(root, key, val, databaseHandle, mfgID, Sln, TestNameTe
 	top.title("Waiting for user input...")
 	top.resizable(0,0)
 
-	msg = Message(top, text = "Solder the betteries, Press Finger Switch When Solder Is Complete To Check Reverse Battery\n \n CLAMP MUST BE DOWN", width = 200)
+	msg = Message(top, text = "Solder LCD only, Press Finger Switch When Solder Is Complete", width = 200)
 	msg.place(x=10,y=10)
 
 	buttonCancel = Button(top, text = "Cancel", command = setcancelPressed)
