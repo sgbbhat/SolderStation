@@ -28,15 +28,15 @@ def Info_Messagebox_Before(root, key, val, databaseHandle, mfgID, Sln, TestNameT
 
 	cancelPressed = True
 	top = Toplevel(master = root)
-	top.geometry("%dx%d%+d%+d" % (250, 130,750,450))
+	top.geometry("%dx%d%+d%+d" % (240, 180,750,450))
 	top.title("Waiting for user input...")
 	top.resizable(0,0)
 
-	msg = Message(top, text = "LOAD BOARD AND LCD ON BOARD, \n PRESS CLAMP DOWN \n THEN PRESS FINGER SWITCH TO START.", width = 250)
+	msg = Message(top, text = "LOAD BOARD AND LCD ON BOARD, \n \nPRESS CLAMP DOWN, \n \nTHEN PRESS FINGER SWITCH TO START.", width = 250)
 	msg.place(x=10,y=10)
 
 	buttonCancel = Button(top, text = "Cancel", command = setcancelPressed)
-	buttonCancel.place(x=65,y=70)
+	buttonCancel.place(x=95,y=110)
 
 	top.attributes('-topmost', 'true')	
 	root.update()

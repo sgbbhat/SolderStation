@@ -125,7 +125,7 @@ LastScannedLabelTitle = CreateLabel(root, "LastScannedLabelTitle",  "Last Scanne
 LastScannedSerialNumberTitle = CreateLabel(root, "LastScannedSerialNumberTitle",  "Serial Number"  , 1,  25, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 416, 125)
 
 # Row#3 :  Label to diplay Messages heading
-MessagesLabelTitle = CreateLabel(root, "MessagesLabelTitle",  "Messages"  , 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 18, 175)
+MessagesLabelTitle = CreateLabel(root, "MessagesLabelTitle",  "Select Model File & Scan Mfg.ID to Start..."  , 1,  90, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 18, 175)
 
 # Row#2 : Battery Lot # heading
 LotNumLabelTitle = CreateLabel(root, "LotNumLabelTitle",  "Battery Lot#", 1,  12, "flat", 'SlateGray4' ,  'white' , ('Times', 11) , 416, 70)

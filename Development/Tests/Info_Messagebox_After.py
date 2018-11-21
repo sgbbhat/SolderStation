@@ -28,15 +28,15 @@ def Info_Messagebox_After(root, key, val, databaseHandle, mfgID, Sln, TestNameTe
 
 	cancelPressed = True	
 	top = Toplevel(master = root)
-	top.geometry("%dx%d%+d%+d" % (200, 170,750,450))
+	top.geometry("%dx%d%+d%+d" % (230, 150,750,450))
 	top.title("Waiting for user input...")
 	top.resizable(0,0)
 
-	msg = Message(top, text = "Solder LCD only, Press Finger Switch When Solder Is Complete", width = 200)
+	msg = Message(top, text = "SOLDER LCD ONLY, \n \nWHEN SOLDER IS COMPLETE, \nPRESS FINGER SWITCH", width = 230)
 	msg.place(x=10,y=10)
 
 	buttonCancel = Button(top, text = "Cancel", command = setcancelPressed)
-	buttonCancel.place(x=50,y=100)
+	buttonCancel.place(x=75,y=100)
 	
 	top.attributes('-topmost', 'true')	
 	root.update()
