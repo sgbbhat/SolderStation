@@ -20,6 +20,7 @@ Log Test Data_SQL,		Action,				0,			0,			,		0,		1.00,	None
 
 [General]
 Part_No, ERG7100005-Curie
+Current_Step, Solder
 FG Part_No=ERW-1300-302
 Unit Type=Intelis
 Notes=""
