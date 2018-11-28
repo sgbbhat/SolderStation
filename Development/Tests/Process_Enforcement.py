@@ -18,13 +18,14 @@ def Process_Enforcement(root, key, val, databaseHandle, mfgID, Sln, TestNameText
 	getProcessStepReturn = databaseHandle.fetchall()
 	ProcessStep = (getProcessStepReturn[0])[0]
 	PrePartNumber = (getProcessStepReturn[0])[1]
+	databaseHandle.commit()
 
 	if bool(PrePartNumber) == False:
 		PrePartNumberTestResult_lookup = [()]
 		PrePartNumberTestResult = [()]
 		pass
 	else:
-		databaseHandle.execute("Select Passed from dbo.InProcess WHERE  MfgSerialNumber = ? AND PartNumber = ? " , mfgID, 'ERG7100005-Curie')
+		databaseHandle.execute("Select Passed from dbo.InProcess WHERE  MfgSerialNumber = ? AND PartNumber = ? " , mfgID, CurrentPartNumber)
 		PrePartNumberTestResult = databaseHandle.fetchall()
 
 	PrePartNumberTestResult_lookup = [item for item in PrePartNumberTestResult if 1 in item]
