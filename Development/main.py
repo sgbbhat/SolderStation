@@ -40,7 +40,7 @@ from Tests.Info_Messagebox_Before import Info_Messagebox_Before
 from Tests.Info_Messagebox_After import Info_Messagebox_After
 from Tests.displayResult import displayResult
 from Tests.Info_Messagebox_After_Bridge import Info_Messagebox_After_Bridge
-from Tests.Battery_Voltage_After_Bridge import Battery_Voltage_After_Bridge
+from Tests.Vin_Voltage import Vin_Voltage
 from Tests.BAT1_Reverse import BAT1_Reverse
 from Tests.BAT2_Reverse import BAT2_Reverse
 
@@ -63,7 +63,7 @@ def Select_Test(name):
 		"InfoMessageboxBefore" : Info_Messagebox_Before, 
 		"InfoMessageboxAfter" : Info_Messagebox_After,
                 "InfoMessageboxAfterBridge" : Info_Messagebox_After_Bridge,
-                "BatteryVoltageAfterBridge" : Battery_Voltage_After_Bridge,
+                "VinVoltage" : Vin_Voltage,
 		}.get(name, defaultfun)
 
 modelFileContent = OrderedDict()

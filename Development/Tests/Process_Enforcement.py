@@ -32,6 +32,7 @@ def Process_Enforcement(root, key, val, databaseHandle, mfgID, Sln, TestNameText
 	IsUnitPassedParam = (ProcessStep, PrePartNumber, Sln, retResult)
 	databaseHandle.execute("{CALL [dbo].[IsUnitPassed] (?, ?, ?, ?)}", IsUnitPassedParam)
 	IsUnitPassedReturn = int((databaseHandle.fetchall()[0])[0])
+	databaseHandle.commit()
 
 	if IsUnitPassedReturn == 1:
 		result = "Pass"
