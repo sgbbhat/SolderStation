@@ -7,7 +7,10 @@ def Process_Enforcement(root, key, val, databaseHandle, mfgID, Sln, TestNameText
 	# Running a stored procedure - getFlowKey
 	getFlowKeyParam = (Sln, (modelFileContent['Part_No'])[0])
 	databaseHandle.execute("{CALL [dbo].[getFlowKey] (?, ?)}", getFlowKeyParam)
-	ProcessFlowKey = ((databaseHandle.fetchall())[0])[0]
+	try:
+		ProcessFlowKey = ((databaseHandle.fetchall())[0])[0]
+	except:
+		ProcessFlowKey = ''
 	databaseHandle.commit()
 
 	# Running a stored procedure - getProcessStep
@@ -16,23 +19,21 @@ def Process_Enforcement(root, key, val, databaseHandle, mfgID, Sln, TestNameText
 	getProcessStepParam = (ProcessFlowKey, CurrentProcessStep, CurrentPartNumber)
 	databaseHandle.execute("{CALL [dbo].[getProcessStep] (?, ?, ?)}", getProcessStepParam)
 	getProcessStepReturn = databaseHandle.fetchall()
-	ProcessStep = (getProcessStepReturn[0])[0]
-	PrePartNumber = (getProcessStepReturn[0])[1]
+	try:
+		ProcessStep = (getProcessStepReturn[0])[0]
+		PrePartNumber = (getProcessStepReturn[0])[1]
+	except:
+		ProcessStep = ''
+		PrePartNumber = ''		
 	databaseHandle.commit()
 
-	if bool(PrePartNumber) == False:
-		PrePartNumberTestResult_lookup = [()]
-		PrePartNumberTestResult = [()]
-		pass
-	else:
-		databaseHandle.execute("Select Passed from dbo.InProcess WHERE  MfgSerialNumber = ? AND PartNumber = ? " , mfgID, CurrentPartNumber)
-		PrePartNumberTestResult = databaseHandle.fetchall()
+	# Checking if the unit is passed using the stored procedure - IsUnitPassed
+	retResult = ''
+	IsUnitPassedParam = (ProcessStep, PrePartNumber, Sln, retResult)
+	databaseHandle.execute("{CALL [dbo].[IsUnitPassed] (?, ?, ?, ?)}", IsUnitPassedParam)
+	IsUnitPassedReturn = int((databaseHandle.fetchall()[0])[0])
 
-	PrePartNumberTestResult_lookup = [item for item in PrePartNumberTestResult if 1 in item]
-	if bool(PrePartNumberTestResult_lookup) == False:
-		result = "Fail"
-		measurement = 0		
-	elif (PrePartNumberTestResult_lookup[0])[0] == 1 :
+	if IsUnitPassedReturn == 1:
 		result = "Pass"
 		measurement = 1
 	else:
