@@ -1,4 +1,4 @@
-# Function runs the stored procedure "getSerialNumber" taking Manufacturing Serial Number as input
+# Function runs the stored procedure "getSerialNumber" taking Manufacturing Serial Number as parameters
 
 def getSerialNumber(databaseHandle, mfgID, MessageDisplaySlNo):
 	databaseHandle.execute("{CALL [dbo].[getSerialNumber] (?)}", mfgID)

@@ -8,9 +8,12 @@ from tkinter import messagebox
 
 def BAT2_Reverse(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	measurement = popen('megaio 0 optread 7').read()
-	result = 'Pass' if float(measurement) == float(val[1]) else 'Fail'
 
+	# Substitues space before every capital letter
 	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
+
+	# Decide result based on the measurement
+	result = 'Pass' if float(measurement) == float(val[1]) else 'Fail'
 
 	# Display Test and results
 	displayResult(TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, mod_TestName, val, float(measurement), result)

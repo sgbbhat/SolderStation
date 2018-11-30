@@ -9,8 +9,15 @@ def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, 
 	elif OperationMode == 'Production' :
 		OperationModeExp = 'P'
 
-	databaseHandle.execute("Select distinct ProcessFlowKey from dbo.TestEvent WHERE MfgSerialNumber = ? AND ProcessFlowKey != 0", mfgID)
-	ProcessFlowKey = databaseHandle.fetchall()	
+	# Running a stored procedure - getFlowKey
+	getFlowKeyParam = (Sln, (modelFileContent['Part_No'])[0])
+	databaseHandle.execute("{CALL [dbo].[getFlowKey] (?, ?)}", getFlowKeyParam)
+	try:
+		ProcessFlowKey = ((databaseHandle.fetchall())[0])[0]
+	except:
+		ProcessFlowKey = 0
+	databaseHandle.commit()
+
 	TestNameTextContent = TestNameText.get(1.0, END)
 	MinLimitTextContent = MinLimitText.get(1.0, END)	
 	MaxLimitTextContent = MaxLimitText.get(1.0, END)
@@ -24,7 +31,7 @@ def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, 
 
 	# Insert in to Test Events Table
 	timeNow = datetime.datetime.now() 
-	testEventParam = (Sln, mfgID, (modelFileContent['Part_No'])[0], 1 ,int((ProcessFlowKey[0])[0]), OperationModeExp, 501 , 1, "" , int(Passed), timeNow, OperationModeInput)
+	testEventParam = (Sln, mfgID, (modelFileContent['Part_No'])[0], 1 ,ProcessFlowKey, OperationModeExp, 501 , 1, "" , int(Passed), timeNow, OperationModeInput)
 	databaseHandle.execute("{CALL [dbo].[insertTestEvent] (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}", testEventParam)
 	TestEventKey = int(((databaseHandle.fetchall())[0])[0])
 	databaseHandle.commit()
