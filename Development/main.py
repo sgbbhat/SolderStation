@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-import time
-import datetime
+
 from Settings.import_module import *
 
 def Select_Test(name):

@@ -18,13 +18,10 @@ def BAT2_Voltage(root, key, val, databaseHandle, mfgID,Sln, TestNameText, MinLim
 
 	# Display Test and results
 	displayResult(TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, mod_TestName, val, measurement, result)
-	
-	# Pop-up message in case of bad battery
-	if result == 'Fail' :
-            messagebox.showerror("Error", "Bad Battery 2")
 
 	# Return test results
 	if result == "Fail" :
+		messagebox.showerror("Error", "Bad Battery 2")
 		return False
 	else:
 		return True

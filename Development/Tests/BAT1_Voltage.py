@@ -11,21 +11,19 @@ def BAT1_Voltage(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLi
 	rawScale = popen('megaio 0 aread 1').read()
 	measurement = float(rawScale)/4095.0 * 3.74 * 2.0
 
-	# Substitues space before every capital letter
-	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
-
 	# Decide result based on the measurement
 	result = 'Pass' if measurement > float(val[1]) and measurement < float(val[2]) else 'Fail'
+
+	# Substitues space before every capital letter
+	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
 
 	# Display tests and results
 	displayResult(TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, mod_TestName, val, measurement, result)
 
-	# Pop-up message in case of bad battery
-	if result == 'Fail' :
-            messagebox.showerror("Error", "Bad Battery 1")
-
 	# Return test results
 	if result == "Fail":
+		# Pop-up message in case of bad battery
+		messagebox.showerror("Error", "Bad Battery 1")
 		return False
 	else:
 		return True

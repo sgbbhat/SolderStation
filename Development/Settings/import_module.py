@@ -1,5 +1,7 @@
 
 # Import general modules
+import time
+import datetime
 from tkinter import filedialog
 from tkinter import *
 from tkinter import messagebox 
