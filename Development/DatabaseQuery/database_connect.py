@@ -7,7 +7,3 @@ def database_connect():
 		return cursor
 	except:
 		return -99
-
-#cursor.execute("Select * from dbo.Part")
-#for row in cursor.fetchall():
-#	print(row)
