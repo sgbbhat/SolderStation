@@ -1,4 +1,4 @@
-# Function displays test results on the user interface under "Messages Section"
+# Function displays test results in on the user interface under "Messages Section"
 
 from tkinter import END
 from os import *

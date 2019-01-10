@@ -8,11 +8,8 @@ from Tests.displayResult import displayResult
 def Vin_Voltage(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	rawScale = popen('megaio 0 aread 8').read()
 	measurement = float(rawScale)/4095.0 * 3.57 * 2.0
-
-	# Decide result based on the measurement
 	result = 'Pass' if measurement > float(val[1]) and measurement < float(val[2]) else 'Fail'
 
-	# Substitues space before every capital letter
 	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
 
 	# Display Test and results

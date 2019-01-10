@@ -9,10 +9,8 @@ def RST1_Voltage_Low(root, key, val, databaseHandle, mfgID, Sln, TestNameText, M
 	rawScale = popen('megaio 0 aread 3').read()
 	measurement = float(rawScale)/4095.0 * 3.3
 	
-	# Decide result based on the measurement
-	result = 'Pass' if measurement >= float(val[1]) and measurement <= float(val[2]) else 'Fail'
+	result = 'Pass' if measurement >= float(val[1]) and measurement <= float(val[2]) 	else 'Fail'
 
-	# Substitues space before every capital letter
 	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
 
 	# Display tests and results
