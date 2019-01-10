@@ -10,14 +10,16 @@ def Process_Enforcement(root, key, val, databaseHandle, mfgID, Sln, TestNameText
 	try:
 		ProcessFlowKey = ((databaseHandle.fetchall())[0])[0]
 	except:
-		ProcessFlowKey = ''
+		ProcessFlowKey = 0
 	databaseHandle.commit()
 
 	# Running a stored procedure - getProcessStep
 	CurrentPartNumber = (modelFileContent['Part_No'])[0]
-	CurrentProcessStep = (modelFileContent['Current_Step'])[0]
+	CurrentProcessStep = re.sub(r"(\w)([A-Z])", r"\1 \2", (modelFileContent['Current_Step'])[0])
+
 	getProcessStepParam = (ProcessFlowKey, CurrentProcessStep, CurrentPartNumber)
 	databaseHandle.execute("{CALL [dbo].[getProcessStep] (?, ?, ?)}", getProcessStepParam)
+
 	getProcessStepReturn = databaseHandle.fetchall()
 	try:
 		ProcessStep = (getProcessStepReturn[0])[0]
@@ -33,6 +35,7 @@ def Process_Enforcement(root, key, val, databaseHandle, mfgID, Sln, TestNameText
 	databaseHandle.execute("{CALL [dbo].[IsUnitPassed] (?, ?, ?, ?)}", IsUnitPassedParam)
 	IsUnitPassedReturn = int((databaseHandle.fetchall()[0])[0])
 	databaseHandle.commit()
+	
 
 	if IsUnitPassedReturn == 1:
 		result = "Pass"

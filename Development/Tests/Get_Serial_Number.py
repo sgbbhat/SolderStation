@@ -2,7 +2,12 @@
 
 def getSerialNumber(databaseHandle, mfgID, MessageDisplaySlNo):
 	databaseHandle.execute("{CALL [dbo].[getSerialNumber] (?)}", mfgID)
-	serialNumber = ((databaseHandle.fetchall())[0])[0]
+
+	try:
+		serialNumber = ((databaseHandle.fetchall())[0])[0]
+	except:
+		serialNumber = '0'
+
 	MessageDisplaySlNo.config(text = str(serialNumber), anchor = 'w')
 	databaseHandle.commit()
 	return serialNumber
