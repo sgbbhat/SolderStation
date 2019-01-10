@@ -6,9 +6,13 @@ from Tests.displayResult import displayResult
 def Test_Time(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	endTime = time.time()
 
+	# Calculate Time taken to complete the test
 	measurement = int(endTime - testStartTime)
+
+	# Decide result based on the measurement
 	result = 'Pass' if measurement >= int(val[1]) and measurement <= int(val[2]) else 'Fail'
 
+	# Substitues space before every capital letter
 	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
 
 	# Display test results

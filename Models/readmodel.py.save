@@ -1,5 +1,0 @@
-fhandle = open("Intelis.txt", "r")
-testDict = {}
-for line in fhandle:
-	splitname = line.split(',')
-	testDict[splitname[0] = 5.8,			6.5,	

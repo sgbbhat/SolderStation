@@ -10,19 +10,18 @@ from tkinter import messagebox
 def BAT1_Reverse(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	rawScale = popen('megaio 0 aread 1').read()
 
-	# Decide result based on the measurement
-	result = 'Pass' if int(rawScale) > 100 else 'Fail'
-
 	# Substitues space before every capital letter
 	mod_TestName = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
 
+	# Decide result based on the measurement
+	result = 'Pass' if int(rawScale) > 200 else 'Fail'
+
 	# Display tests and results
 	displayResult(TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, mod_TestName, val, float(measurement), result)
+            messagebox.showerror("Error", "Battery 1 connected in Reverse")
 
 	# Return test results
-	if int(rawScale) < 100 :
-		# Pop-up error in case polarity connected in reverse
-		messagebox.showerror("Error", "Battery 1 connected in Reverse")
+	if result ==  'Fail' :
 		return False
 	else:
 		return True

@@ -1,7 +1,7 @@
 # Log_Test_Data_SQL
 from tkinter import END
 import datetime
-from tkinter import messagebox 
+
 
 def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, MinLimitText, MaxLimitText, MeasurementText, ResultText, modelFileContent, testStartTime, OperationMode, OperationModeInput, LotNumvberInput):
 	if OperationMode == 'Experiment' :
@@ -9,15 +9,6 @@ def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, 
 	elif OperationMode == 'Production' :
 		OperationModeExp = 'P'
 
-<<<<<<< HEAD
-	databaseHandle.execute("Select distinct ProcessFlowKey from dbo.TestEvent WHERE MfgSerialNumber = ? AND ProcessFlowKey != 0", mfgID)
-	ProcessFlowKey = databaseHandle.fetchall()	
-	try:
-		ProcessFlowKey_format = int((ProcessFlowKey[0])[0])
-	except:
-		ProcessFlowKey_format = '0'
-		
-=======
 	# Running a stored procedure - getFlowKey
 	getFlowKeyParam = (Sln, (modelFileContent['Part_No'])[0])
 	databaseHandle.execute("{CALL [dbo].[getFlowKey] (?, ?)}", getFlowKeyParam)
@@ -27,7 +18,6 @@ def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, 
 		ProcessFlowKey = 0
 	databaseHandle.commit()
 
->>>>>>> 55817b77366e3f557b31aa4917e5c8ca2111f649
 	TestNameTextContent = TestNameText.get(1.0, END)
 	MinLimitTextContent = MinLimitText.get(1.0, END)	
 	MaxLimitTextContent = MaxLimitText.get(1.0, END)
@@ -41,11 +31,7 @@ def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, 
 
 	# Insert in to Test Events Table
 	timeNow = datetime.datetime.now() 
-<<<<<<< HEAD
-	testEventParam = (Sln, mfgID, (modelFileContent['Part_No'])[0], 1 ,ProcessFlowKey_format, OperationModeExp, 501 , 1, "" , int(Passed), timeNow, OperationModeInput)
-=======
 	testEventParam = (Sln, mfgID, (modelFileContent['Part_No'])[0], 1 ,ProcessFlowKey, OperationModeExp, 501 , 1, "" , int(Passed), timeNow, OperationModeInput)
->>>>>>> 55817b77366e3f557b31aa4917e5c8ca2111f649
 	databaseHandle.execute("{CALL [dbo].[insertTestEvent] (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}", testEventParam)
 	TestEventKey = int(((databaseHandle.fetchall())[0])[0])
 	databaseHandle.commit()
@@ -77,17 +63,5 @@ def Log_Test_Data_SQL(root, key, val, databaseHandle, mfgID, Sln, TestNameText, 
 		databaseHandle.execute("{CALL [dbo].[InsertComponentTraceability] (?, ?, ?, ?)}", param)
 		databaseHandle.commit()
 
-	databaseHandle.execute("Select MfgSerialNumber from dbo.TestEvent WHERE TestEventKey = ?" , TestEventKey)
-	try:
-		MfgIdReturned = (databaseHandle.fetchall()[0])[0]
-	except:
-		MfgIdReturned = ''
-
-	if(MfgIdReturned != mfgID) or MfgIdReturned == '':	
-		messagebox.showerror("Error", "Data Log Failed")
-		returnResult = False
-	else:
-		returnResult = True
-
-	return returnResult
+	return True
 		
